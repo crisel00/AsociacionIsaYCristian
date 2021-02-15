@@ -13,4 +13,8 @@ public class MainActivity extends AppCompatActivity {
         //hola isa
         //hola cristian
     }
+
+    public void imprimirNombre(){
+        System.out.println("Isabel =D");
+    }
 }
