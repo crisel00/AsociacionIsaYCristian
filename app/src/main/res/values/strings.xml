@@ -2,4 +2,8 @@
     <string name="app_name">AsociacionIsaYCristian</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_text">Registrate</string>
+    <string name="login_Text">Acceder</string>
+    <string name="password">Contraseña</string>
+    <string name="txt_mail">Correo</string>
 </resources>
