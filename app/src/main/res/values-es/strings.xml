@@ -15,5 +15,9 @@
     <string name="error_register">El registro falló</string>
     <string name="succes_email">Email enviado</string>
     <string name="error_email">Error al enviar</string>
+    <string name="sesion_ok">Sesion iniciada</string>
 
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

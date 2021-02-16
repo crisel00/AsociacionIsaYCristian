@@ -118,7 +118,7 @@ public class RegisterFragment extends Fragment {
     private void updateUI(FirebaseUser account){
         if(account != null){
             Toast.makeText(getContext(),getResources().getText(R.string.succes_register),Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getContext(),MainActivity.class));
+            startActivity(new Intent(getContext(),TabbedActivity.class));
         }else{
             Toast. makeText(getContext(),getResources().getText(R.string.error_register),Toast. LENGTH_SHORT).show();
         }
