@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AsociacionIsaYCristian</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Layout hints and texts-->
+    <string name="register_text">Register</string>
+    <string name="login_Text">Log in</string>
+    <string name="password">Password</string>
+    <string name="txt_mail">Email</string>
+    <string name="username">Username</string>
+
+    <!--Toast messages-->
+    <string name="succes_register">Successful sign uo</string>
+    <string name="error_register">The register failed</string>
+    <string name="succes_email">Email sent</string>
+    <string name="error_email">Sending error</string>
+</resources>

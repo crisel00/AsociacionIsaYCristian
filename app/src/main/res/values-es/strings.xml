@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AsociacionIsaYCristian</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Layout hints and texts-->
-    <string name="register_text">Regístrate</string>
+    <string name="register_text">Registrarse</string>
     <string name="login_Text">Acceder</string>
     <string name="password">Contraseña</string>
     <string name="txt_mail">Correo electrónico</string>
@@ -14,4 +15,5 @@
     <string name="error_register">El registro falló</string>
     <string name="succes_email">Email enviado</string>
     <string name="error_email">Error al enviar</string>
+
 </resources>
