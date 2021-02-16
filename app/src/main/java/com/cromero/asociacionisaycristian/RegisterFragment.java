@@ -59,7 +59,13 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        //Layout variables initialization
+        et_username= (EditText)getView().findViewById(R.id.et_username);
+        et_email = (EditText)getView().findViewById(R.id.et_email);
+        et_password = (EditText)getView().findViewById(R.id.et_loginPassword);
         bt_register= getView().findViewById(R.id.bt_register);
+
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
