@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +33,7 @@ public class login_fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button bt_login, bt_register;
+    Button bt_login, bt_registrar;
     EditText et_correo, et_contrasena;
 
 
@@ -81,7 +80,7 @@ public class login_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         bt_login = getView().findViewById(R.id.bt_login);
-        bt_register = getView().findViewById(R.id.bt_register);
+        bt_registrar = getView().findViewById(R.id.bt_singUp);
 
         et_correo = getView().findViewById(R.id.et_loginCorreo);
         et_contrasena = getView().findViewById(R.id.et_loginPassword);
@@ -99,7 +98,7 @@ public class login_fragment extends Fragment {
             }
         });
 
-        bt_register.setOnClickListener(new View.OnClickListener() {
+        bt_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.nav_loginToRegister);

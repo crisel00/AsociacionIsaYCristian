@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -63,8 +66,10 @@ public class RegisterFragment extends Fragment {
         //Layout variables initialization
         et_username= (EditText)getView().findViewById(R.id.et_username);
         et_email = (EditText)getView().findViewById(R.id.et_email);
-        et_password = (EditText)getView().findViewById(R.id.et_loginPassword);
+        et_password = (EditText)getView().findViewById(R.id.et_password);
         bt_register= getView().findViewById(R.id.bt_register);
+
+        mAuth = FirebaseAuth.getInstance();
 
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,25 +89,27 @@ public class RegisterFragment extends Fragment {
         //If all the text fields are complete the user is register
         if(!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(email)&& !TextUtils.isEmpty(password)){
             mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener((Executor) this,
-                            task -> {
-                                //if the account is created correctly the user is redirected to the main activity
-                                if (task.isSuccessful()) {
-                                    //The user is sent a verification Email
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    verifyEmail(user);
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            //if the account is created correctly the user is redirected to the main activity
+                            if (task.isSuccessful()) {
+                                //The user is sent a verification Email
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                verifyEmail(user);
 
                                     /*//The user is created and added to the database
                                     String uid = user.getUid();
                                     User userObject= new User(uid,email,name,phone,user.getProviderId());
                                     dbReference.child("User").child(uid).setValue(userObject);*/
 
-                                    updateUI(user);
-                                } else {
-                                    //if it fails the user is informed
-                                    updateUI(null);
-                                }
-                            });
+                                updateUI(user);
+                            } else {
+                                //if it fails the user is informed
+                                updateUI(null);
+                            }
+                        }
+                    });
         }
 
     }
