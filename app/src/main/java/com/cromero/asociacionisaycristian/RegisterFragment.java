@@ -120,20 +120,22 @@ public class RegisterFragment extends Fragment {
             Toast.makeText(getContext(),getResources().getText(R.string.succes_register),Toast.LENGTH_LONG).show();
             startActivity(new Intent(getContext(),MainActivity.class));
         }else{
-            Toast. makeText(getContext(),getResources().getText(R.string.error_register),Toast. LENGTH_SHORT);
+            Toast. makeText(getContext(),getResources().getText(R.string.error_register),Toast. LENGTH_SHORT).show();
         }
 
     }
     //Method for the verification of the user email
     private void verifyEmail(FirebaseUser user){
-        user.sendEmailVerification().addOnCompleteListener((Executor) this,
-                task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), getResources().getText(R.string.succes_email), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), getResources().getText(R.string.error_email), Toast.LENGTH_LONG).show();
-                    }
-                });
+        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(), getResources().getText(R.string.succes_email), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), getResources().getText(R.string.error_email), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
 }
