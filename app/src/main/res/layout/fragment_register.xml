@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Nombre de usuario"
+            android:hint="@string/username"
             android:inputType="textPersonName"
             android:padding="10dp"/>
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/txt_mail"
             android:inputType="textEmailAddress"
             android:padding="10dp" />
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:text="Registrarse" />
+            android:text="@string/register_text" />
 
 
     </LinearLayout>
