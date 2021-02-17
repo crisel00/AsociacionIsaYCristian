@@ -3,19 +3,19 @@ package com.cromero.asociacionisaycristian.models;
 import java.io.Serializable;
 
 public class IdProduct implements Serializable {
-    String nameStore;
+    String nameProduct;
     String idStore;
 
     public IdProduct() {
     }
 
-    public IdProduct(String nameStore, String idStore) {
-        this.nameStore = nameStore;
+    public IdProduct(String nameProduct, String idStore) {
+        this.nameProduct = nameProduct;
         this.idStore = idStore;
     }
 
-    public String getNameStore() {
-        return nameStore;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
 
