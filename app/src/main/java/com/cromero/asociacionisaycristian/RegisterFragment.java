@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cromero.asociacionisaycristian.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -62,14 +63,17 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         //Layout variables initialization
         et_username= (EditText)getView().findViewById(R.id.et_username);
         et_email = (EditText)getView().findViewById(R.id.et_email);
         et_password = (EditText)getView().findViewById(R.id.et_password);
         bt_register= getView().findViewById(R.id.bt_register);
 
+        //Initialization of Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
+        //Firebase database initialization
+        database= FirebaseDatabase.getInstance();
+        dbReference=database.getReference();
 
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,10 +102,10 @@ public class RegisterFragment extends Fragment {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 verifyEmail(user);
 
-                                    /*//The user is created and added to the database
+                                    //The user is created and added to the database
                                     String uid = user.getUid();
-                                    User userObject= new User(uid,email,name,phone,user.getProviderId());
-                                    dbReference.child("User").child(uid).setValue(userObject);*/
+                                    User userObject= new User(email,name,uid);
+                                    dbReference.child("User").child(uid).setValue(userObject);
 
                                 updateUI(user);
                             } else {
