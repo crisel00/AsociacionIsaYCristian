@@ -1,6 +1,7 @@
 package com.cromero.asociacionisaycristian.ui.main;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -17,7 +18,7 @@ import com.cromero.asociacionisaycristian.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_stores, R.string.tab_users,R.string.tab_orders};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -38,13 +39,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         CharSequence title=null;
         switch (position){
             case 0:
-                title= "SECTION 1";
+                title= mContext.getResources().getText(R.string.tab_stores);
                 break;
             case 1:
-                title=  "SECTION 2";
+                title=  mContext.getResources().getText(R.string.tab_users);
             break;
             case 2:
-                title=  "SECTION 3";
+                title=  mContext.getResources().getText(R.string.tab_orders);
             break;
         }
         return title;

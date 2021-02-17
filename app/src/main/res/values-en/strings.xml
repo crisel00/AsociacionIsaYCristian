@@ -15,10 +15,14 @@
     <string name="error_register">The register failed</string>
     <string name="succes_email">Email sent</string>
     <string name="error_email">Sending error</string>
-    <string name="sesion_ok">Sesion iniciada</string>
+    <string name="sesion_ok">Login correct</string>
+    <string name="short_fields">Password or email too short</string>
 
+    <!--Tabs management-->
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
-    <string name="short_fields">La contraseña o el correo son muy cortos</string>
+    <string name="tab_users">Users</string>
+    <string name="tab_stores">Stores</string>
+    <string name="tab_orders">Orders</string>
 </resources>

@@ -16,9 +16,14 @@
     <string name="succes_email">Email enviado</string>
     <string name="error_email">Error al enviar</string>
     <string name="sesion_ok">Sesion iniciada</string>
+    <string name="short_fields">La contraseña o el correo son muy cortos</string>
 
+
+    <!--Tabs management-->
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
-    <string name="short_fields">La contraseña o el correo son muy cortos</string>
+    <string name="tab_users">Usuarios</string>
+    <string name="tab_stores">Locales</string>
+    <string name="tab_orders">Pedidos</string>
 </resources>

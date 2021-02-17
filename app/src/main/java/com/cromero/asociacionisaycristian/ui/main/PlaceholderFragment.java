@@ -12,8 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cromero.asociacionisaycristian.PruebaFragment;
+import com.cromero.asociacionisaycristian.OrderManagement;
 import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.StoreManagement;
+import com.cromero.asociacionisaycristian.UserManagement;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -27,11 +29,11 @@ public class PlaceholderFragment extends Fragment {
     public static Fragment newInstance(int index) {
         Fragment fragment=null;
         switch (index){
-            case 1: fragment= new PruebaFragment();
+            case 1: fragment= new StoreManagement();
                 break;
-            case 2: fragment= new PruebaFragment();
+            case 2: fragment= new UserManagement();
                 break;
-            case 3: fragment= new PruebaFragment();
+            case 3: fragment= new OrderManagement();
                 break;
         }
         return fragment;
