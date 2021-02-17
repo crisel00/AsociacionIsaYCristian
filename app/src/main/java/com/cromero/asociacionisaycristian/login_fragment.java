@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +35,8 @@ public class login_fragment extends Fragment {
 
     private static final int RC_GOOGLE_API = 1;
     //variables
-    Button bt_login, bt_registrar, bt_googleSingIn;
+    Button bt_login, bt_registrar;
+    SignInButton bt_googleSingIn;
     EditText et_correo, et_contrasena;
     FirebaseAuth mAuth;
     GoogleSignInClient client_google;
@@ -74,6 +76,7 @@ public class login_fragment extends Fragment {
 
         bt_login = getView().findViewById(R.id.bt_login);
         bt_registrar = getView().findViewById(R.id.bt_singUp);
+        bt_googleSingIn = getView().findViewById(R.id.botonGoogle);
 
         et_correo = getView().findViewById(R.id.et_loginCorreo);
         et_contrasena = getView().findViewById(R.id.et_loginPassword);
@@ -84,7 +87,7 @@ public class login_fragment extends Fragment {
                 String correo = et_correo.getText().toString();
                 String contrasena = et_contrasena.getText().toString();
                 if(correo.length()<5 || contrasena.length()<6){
-
+                    Toast.makeText(getContext(), R.string.short_fields, Toast.LENGTH_SHORT).show();
                 } else {
                     if(iniciaSesion(correo,contrasena)){
                         Toast.makeText(getContext(), R.string.sesion_ok, Toast.LENGTH_SHORT).show();
@@ -148,7 +151,7 @@ public class login_fragment extends Fragment {
                 if(mAuth.getCurrentUser() != null){
                     startActivity(new Intent(getContext(),TabbedActivity.class));
                 } else{
-                    Toast.makeText(getContext(),"Error al iniciar sesion", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),R.string.error_register, Toast.LENGTH_LONG).show();
                 }
             } catch (ApiException e) {
                 Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT).show();

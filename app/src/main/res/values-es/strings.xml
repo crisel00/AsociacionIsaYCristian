@@ -20,4 +20,5 @@
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="short_fields">La contraseña o el correo son muy cortos</string>
 </resources>
