@@ -1,6 +1,8 @@
 package com.cromero.asociacionisaycristian.models;
 
-public class OrderLine {
+import java.io.Serializable;
+
+public class OrderLine implements Serializable {
     Product product;
     Float amount;
 

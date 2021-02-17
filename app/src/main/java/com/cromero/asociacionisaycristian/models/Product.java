@@ -1,6 +1,8 @@
 package com.cromero.asociacionisaycristian.models;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     String description;
     Float stock, price;
     IdProduct idProduct;

@@ -1,6 +1,8 @@
 package com.cromero.asociacionisaycristian.models;
 
-public class IdProduct {
+import java.io.Serializable;
+
+public class IdProduct implements Serializable {
     String nameStore;
     String idStore;
 

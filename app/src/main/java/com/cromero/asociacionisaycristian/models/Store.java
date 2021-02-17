@@ -1,9 +1,10 @@
 package com.cromero.asociacionisaycristian.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+public class Store implements Serializable {
     String idStore, nameStore;
     List<Product> products= new ArrayList<Product>();
 
