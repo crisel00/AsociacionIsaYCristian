@@ -15,6 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,13 +31,24 @@ import com.google.firebase.auth.FirebaseAuth;
  * create an instance of this fragment.
  */
 public class login_fragment extends Fragment {
-    Button bt_login, bt_registrar;
-    EditText et_correo, et_contrasena;
 
+    private static final int RC_GOOGLE_API = 1;
+    //variables
+    Button bt_login, bt_registrar, bt_googleSingIn;
+    EditText et_correo, et_contrasena;
+    FirebaseAuth mAuth;
+    GoogleSignInClient client_google;
 
     public login_fragment() {
         // Required empty public constructor
     }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment login_fragment.
+     */
     public static login_fragment newInstance(String param1, String param2) {
         login_fragment fragment = new login_fragment();
         Bundle args = new Bundle();
@@ -84,6 +100,28 @@ public class login_fragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.nav_loginToRegister);
             }
         });
+
+        //todo Inicializar login google
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        client_google = GoogleSignIn.getClient(getContext(), gso);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        bt_googleSingIn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent singIntent = client_google.getSignInIntent();
+                startActivityForResult(singIntent, RC_GOOGLE_API);
+            }
+        });
+
+
     }
 
 
@@ -94,12 +132,28 @@ public class login_fragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         exito = task.isSuccessful();
-                        startActivity(new Intent(getContext(),TabbedActivity.class));
                     }
                 }
         );
         return exito;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_GOOGLE_API){
+            Task<GoogleSignInAccount> gTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = gTask.getResult(ApiException.class);
+                if(mAuth.getCurrentUser() != null){
+                    startActivity(new Intent(getContext(),TabbedActivity.class));
+                } else{
+                    Toast.makeText(getContext(),"Error al iniciar sesion", Toast.LENGTH_LONG).show();
+                }
+            } catch (ApiException e) {
+                Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
 
+        }
+    }
 }
