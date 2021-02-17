@@ -87,7 +87,8 @@ public class login_fragment extends Fragment {
 
                 } else {
                     if(iniciaSesion(correo,contrasena)){
-                        Toast.makeText(getContext(),"Se ha iniciado sesion",Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(), R.string.sesion_ok, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(),TabbedActivity.class));
                     }
 
                 }
