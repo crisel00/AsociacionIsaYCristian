@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
 
         <LinearLayout
@@ -70,7 +70,22 @@
                 android:layout_marginEnd="20dp"
                 android:layout_weight="2"
                 android:text="@string/login_Text" />
+
         </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/botonGoogle"
+            android:layout_width="221dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.484"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 </FrameLayout>
