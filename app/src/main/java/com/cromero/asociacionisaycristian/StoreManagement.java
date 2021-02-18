@@ -1,5 +1,6 @@
 package com.cromero.asociacionisaycristian;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.cromero.asociacionisaycristian.controllers.AdapterStore;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,8 +58,15 @@ public class StoreManagement extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //RecyclerView initialization
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(getContext(), MainActivity.class));
+            }
+        });
 
+        //RecyclerView initialization
         recView = (RecyclerView) view.findViewById(R.id.rv_Store);
 
         //Assignment of the Layout to the Recycler View
