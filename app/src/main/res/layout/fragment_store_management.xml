@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".StoreManagement">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/rv_Store"
+        android:scrollbars="vertical"
+        tools:context=".UserManagement">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
