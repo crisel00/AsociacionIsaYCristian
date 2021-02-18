@@ -14,12 +14,20 @@ import android.view.ViewGroup;
 
 import com.cromero.asociacionisaycristian.controllers.AdapterStore;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StoreManagement extends Fragment {
 
+    ArrayList<Store> stores;
+    DatabaseReference dbRefenrece = FirebaseDatabase.getInstance().getReference();
+    RecyclerView recView;
 
     public StoreManagement() {
         // Required empty public constructor
@@ -49,15 +57,18 @@ public class StoreManagement extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //RecyclerView initialization
-        RecyclerView recView = (RecyclerView) view.findViewById(R.id.rv_Store);
+
+        recView = (RecyclerView) view.findViewById(R.id.rv_Store);
 
         //Assignment of the Layout to the Recycler View
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recView.setLayoutManager(layoutManager);
 
+        stores = new ArrayList<Store>();
 
-        ArrayList<Store> stores=new ArrayList<Store>();
-        Store store= new Store("1","Panadería 1");
+        listenStoreDatabase();
+
+ /**       Store store= new Store("1","Panadería 1");
         stores.add(store);
          store= new Store("2","Panadería 2");
         stores.add(store);
@@ -68,9 +79,41 @@ public class StoreManagement extends Fragment {
          store= new Store("5","Panadería 5");
         stores.add(store);
          store= new Store("6","Panadería 6");
-        stores.add(store);
+        stores.add(store);*/
+
         //Assignment of the Recycler View adapter with the user list
         AdapterStore adapter = new AdapterStore(stores);
         recView.setAdapter(adapter);
+    }
+
+
+
+    public void listenStoreDatabase (){
+        dbRefenrece.child("stores").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+
+                    Iterable<DataSnapshot> datos = snapshot.getChildren();
+                    for(DataSnapshot snap: datos){
+                        stores.add(snap.getValue(Store.class));
+                    }
+                    AdapterStore adapter = new AdapterStore(stores);
+                    recView.setAdapter(adapter);
+
+                } else {
+                    Store store = new Store("ST_0101", "random_store");
+                    dbRefenrece.child("stores").child(store.getIdStore()).setValue(store);
+
+                    store = new Store("Basement", "Help");
+                    dbRefenrece.child("stores").child(store.getIdStore()).setValue(store);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
