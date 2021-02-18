@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cromero.asociacionisaycristian.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,6 +26,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +38,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class login_fragment extends Fragment {
 
     private static final int RC_GOOGLE_API = 1;
+    private DatabaseReference dbReference;
+    private FirebaseDatabase database;
+
     //variables
     Button bt_login, bt_registrar;
     SignInButton bt_googleSingIn;
@@ -80,6 +87,9 @@ public class login_fragment extends Fragment {
 
         et_correo = getView().findViewById(R.id.et_loginCorreo);
         et_contrasena = getView().findViewById(R.id.et_loginPassword);
+
+        database= FirebaseDatabase.getInstance();
+        dbReference=database.getReference();
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +159,12 @@ public class login_fragment extends Fragment {
             try {
                 GoogleSignInAccount account = gTask.getResult(ApiException.class);
                 if(mAuth.getCurrentUser() != null){
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    String uid = user.getUid();
+                    User userObject= new User(user.getEmail(),user.getDisplayName(),uid);
+                    dbReference.child("User").child(uid).setValue(userObject);
+
                     startActivity(new Intent(getContext(),TabbedActivity.class));
                 } else{
                     Toast.makeText(getContext(),R.string.error_register, Toast.LENGTH_LONG).show();
@@ -156,7 +172,6 @@ public class login_fragment extends Fragment {
             } catch (ApiException e) {
                 Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 }
