@@ -1,12 +1,15 @@
 package com.cromero.asociacionisaycristian.controllers;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,17 +44,21 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
 
     @Override
     public void onBindViewHolder(@NonNull AdapterStoreViewHolder holder, int position) {
-        //The store data are put into the layout
         Store storeItem= stores.get(position);
-        holder.tv_nameStore.setText(storeItem.getNameStore());
-        holder.tv_idStore.setText(storeItem.getIdStore());
+        String idStore=storeItem.getIdStore();
+        String nameStore=storeItem.getNameStore();
+        //The store data are put into the layout
+        holder.tv_nameStore.setText(nameStore);
+        holder.tv_idStore.setText(idStore);
 
         //Each item will have an OnClickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*//When an item is pressed the chat activity will be launched
-                Intent intent= new Intent(context, Chat.class);
+                //When an item is pressed an option menu will be showed
+                showDialog(v,idStore,nameStore);
+
+               /* Intent intent= new Intent(context, Chat.class);
                 intent.putExtra("uidContact",storeItem.uid);
                 context.startActivity(intent);*/
             }
@@ -80,5 +87,54 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
             tv_nameStore=(TextView) itemView.findViewById(R.id.tv_nameStore);
             tv_idStore=(TextView) itemView.findViewById(R.id.tv_idStore);
         }
+    }
+
+    //OptionDialog creation method
+    private void showDialog(View view,String idStore, String nameStore){
+        //Initialization
+        AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
+        optionDialog.setTitle(nameStore);
+
+        //Options creation
+        CharSequence opciones[] = {view.getResources().getText(R.string.manage),view.getResources().getText(R.string.delete)};
+        //OnClickMethod for each option
+        optionDialog.setItems(opciones, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                switch(item){
+                    case 0:
+                        Toast.makeText(context, "Opcion 1 Elegida", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        deleteConfirmation(view, idStore,nameStore);
+                        break;
+                }
+            }
+        });
+        //Dialog creation
+        AlertDialog alertDialog = optionDialog.create();
+        alertDialog.show();
+    }
+
+    private void deleteConfirmation(View view,String idStore, String nameStore){
+        //Initialization
+        AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
+        alertDialogBu.setTitle(view.getResources().getText(R.string.delete));
+        alertDialogBu.setMessage(view.getResources().getText(R.string.are_you_sure) + nameStore + view.getResources().getText(R.string.cant_undo));
+
+        //Positive option
+        alertDialogBu.setPositiveButton( view.getResources().getText(R.string.accept), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, nameStore + view.getResources().getText(R.string.is_deleted), Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Negative option
+        alertDialogBu.setNegativeButton(view.getResources().getText(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, view.getResources().getText(R.string.cancelled), Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Dialog creation
+        AlertDialog alertDialog = alertDialogBu.create();
+        alertDialog.show();
     }
 }
