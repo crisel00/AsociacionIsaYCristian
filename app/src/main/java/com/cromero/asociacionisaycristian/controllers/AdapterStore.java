@@ -24,6 +24,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
     public AdapterStore(ArrayList<Store> stores){
 
         this.stores = stores;
+
     }
 
     @NonNull
