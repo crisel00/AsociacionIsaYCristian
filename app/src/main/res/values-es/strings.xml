@@ -30,10 +30,11 @@
     <!--Adapter Store texts-->
     <string name="manage">Administrar</string>
     <string name="delete">Borrar</string>
-    <string name="are_you_sure">¿Seguro que quieres borrar </string>
+    <string name="are_you_sure">¿Seguro que quieres borrar \ </string>
     <string name="cant_undo">\? Esta opción no se puede deshacer</string>
     <string name="is_deleted"> eliminado</string>
     <string name="accept">\Aceptar</string>
     <string name="cancel"> Cancelar</string>
+    <string name="edit"> Editar</string>
     <string name="cancelled"> Cancelado</string>
 </resources>

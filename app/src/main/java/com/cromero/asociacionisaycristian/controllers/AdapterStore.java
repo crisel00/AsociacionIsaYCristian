@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cromero.asociacionisaycristian.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Store;
 
@@ -102,7 +103,9 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
             public void onClick(DialogInterface dialog, int item) {
                 switch(item){
                     case 0:
-                        Toast.makeText(context, "Opcion 1 Elegida", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(context, ProductsActivity.class);
+                        //intent.putExtra("uidContact",storeItem.uid);
+                        context.startActivity(intent);
                         break;
                     case 1:
                         deleteConfirmation(view, idStore,nameStore);

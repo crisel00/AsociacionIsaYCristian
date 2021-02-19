@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsociacionIsaYCristian">
-        <activity android:name=".view_addStore"></activity>
+        <activity android:name=".ProductsActivity"></activity>
+        <activity android:name=".view_addStore" />
         <activity android:name=".TabbedActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

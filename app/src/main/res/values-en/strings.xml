@@ -29,10 +29,11 @@
     <!--Adapter Store texts-->
     <string name="manage">Manage</string>
     <string name="delete">Delete</string>
-    <string name="are_you_sure">Are you sure you want to delete </string>
+    <string name="are_you_sure">Are you sure you want to delete \ </string>
     <string name="cant_undo">\? This option can\'t be undone</string>
     <string name="is_deleted">\ deleted</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="edit"> Edit</string>
     <string name="cancelled"> Cancelled</string>
 </resources>

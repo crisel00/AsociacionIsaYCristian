@@ -11,14 +11,14 @@ Product implements Serializable {
     public Product() {
     }
 
-    public Product(IdProduct idProduct, String description, Float price, Float stock) {
+    public Product(IdProduct idProduct, String description, float price, Float stock) {
         this.idProduct = idProduct;
         this.description = description;
         this.price = price;
         this.stock= stock;
     }
 
-    public Product(IdProduct idProduct, Float price) {
+    public Product(IdProduct idProduct, float price) {
         this.idProduct = idProduct;
         this.price = price;
     }
