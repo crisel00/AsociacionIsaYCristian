@@ -104,7 +104,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
                 switch(item){
                     case 0:
                         Intent intent= new Intent(context, ProductsActivity.class);
-                        //intent.putExtra("uidContact",storeItem.uid);
+                        intent.putExtra("idStore",idStore);
                         context.startActivity(intent);
                         break;
                     case 1:

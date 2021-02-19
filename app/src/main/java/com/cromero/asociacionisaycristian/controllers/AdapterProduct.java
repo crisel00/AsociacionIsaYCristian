@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cromero.asociacionisaycristian.R;
-import com.cromero.asociacionisaycristian.models.IdProduct;
 import com.cromero.asociacionisaycristian.models.Product;
 
 import java.util.ArrayList;
@@ -24,9 +23,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
 
     //AdapterStore's constructor
     public AdapterProduct(ArrayList<Product> products) {
-
         this.products = products;
-
     }
 
     @NonNull
@@ -45,9 +42,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
     public void onBindViewHolder(@NonNull AdapterProductViewHolder holder, int position) {
         Product productItem = products.get(position);
 
-        IdProduct idProduct = productItem.getIdProduct();
-        String nameProduct= idProduct.getNameProduct();
-        String idStore=idProduct.getIdStore();
+        String idProduct= productItem.getIdProduct();
+        String nameProduct= productItem.getProductName();
         String description = productItem.getDescription();
         Float price = productItem.getPrice();
         Float stock = productItem.getStock();
@@ -63,7 +59,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
             @Override
             public void onClick(View v) {
                 //When an item is pressed an option menu will be showed
-               showDialog(v, idStore, nameProduct);
+               showDialog(v, idProduct, nameProduct);
             }
         });
 
@@ -95,7 +91,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
     }
 
     //OptionDialog creation method
-    private void showDialog(View view, String idStore, String nameProduct) {
+    private void showDialog(View view, String idProduct, String nameProduct) {
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
         optionDialog.setTitle(nameProduct);
@@ -110,7 +106,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
                         Toast.makeText(context, "Opcion 1 Elegida", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        deleteConfirmation(view, idStore, nameProduct);
+                        deleteConfirmation(view, idProduct, nameProduct);
                         break;
                 }
             }
@@ -120,7 +116,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
         alertDialog.show();
     }
 
-    private void deleteConfirmation(View view, String idStore, String nameProduct) {
+    private void deleteConfirmation(View view, String idProduct, String nameProduct) {
         //Initialization
         AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
         alertDialogBu.setTitle(view.getResources().getText(R.string.delete));
