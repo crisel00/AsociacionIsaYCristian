@@ -4,26 +4,35 @@ import java.io.Serializable;
 
 public class
 Product implements Serializable {
-    String description;
+    String description,productName,idProduct;
     Float stock, price;
-    IdProduct idProduct; //productName and storeId
 
     public Product() {
     }
 
-    public Product(IdProduct idProduct, String description, float price, Float stock) {
+    public Product(String idProduct,String productName, String description, float price, Float stock) {
         this.idProduct = idProduct;
+        this.productName=productName;
         this.description = description;
         this.price = price;
         this.stock= stock;
     }
 
-    public Product(IdProduct idProduct, float price) {
+    public Product(String idProduct,String productName, float price) {
         this.idProduct = idProduct;
+        this.productName=productName;
         this.price = price;
     }
 
-    public IdProduct getIdProduct() {
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getIdProduct() {
         return idProduct;
     }
 
