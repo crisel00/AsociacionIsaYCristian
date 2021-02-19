@@ -6,7 +6,7 @@ public class
 Product implements Serializable {
     String description;
     Float stock, price;
-    IdProduct idProduct;
+    IdProduct idProduct; //productName and storeId
 
     public Product() {
     }
