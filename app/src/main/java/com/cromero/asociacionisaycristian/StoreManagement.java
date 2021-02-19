@@ -1,6 +1,5 @@
 package com.cromero.asociacionisaycristian;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,13 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StoreManagement extends Fragment {
 
     ArrayList<Store> stores;
     DatabaseReference dbRefenrece = FirebaseDatabase.getInstance().getReference();
     RecyclerView recView;
+    FloatingActionButton bt_addStore;
 
     public StoreManagement() {
         // Required empty public constructor
@@ -58,7 +57,7 @@ public class StoreManagement extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_addStore);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
