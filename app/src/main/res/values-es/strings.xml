@@ -9,6 +9,8 @@
     <string name="password">Contraseña</string>
     <string name="txt_mail">Correo electrónico</string>
     <string name="username">Nombre de usuario</string>
+    <string name="addStore_HintID">Id de la tienda</string>
+    <string name="addStore_hintName">Nombre de la tienda</string>
 
     <!--Toast messages-->
     <string name="succes_register">Registro completo</string>

@@ -9,6 +9,8 @@
     <string name="password">Password</string>
     <string name="txt_mail">Email</string>
     <string name="username">Username</string>
+    <string name="addStore_HintID">Store ID</string>
+    <string name="addStore_hintName">Store Name</string>
 
     <!--Toast messages-->
     <string name="succes_register">Successful sign uo</string>
