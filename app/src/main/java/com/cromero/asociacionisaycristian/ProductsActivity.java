@@ -39,18 +39,21 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+        //The storeId is recovered
+        intent = getIntent();
+        String idStore= intent.getStringExtra("idStore");
+
         //FloatingActionButton Listener
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addProduct);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), AddProductActivity.class));
+                Intent intent= new Intent(getBaseContext(), AddProductActivity.class);
+                intent.putExtra("idStore",idStore);
+                startActivity(intent);
             }
         });
 
-        //The storeId is recovered
-        intent = getIntent();
-        String idStore= intent.getStringExtra("idStore");
 
         //RecyclerView and list initialization
         recView = (RecyclerView) findViewById(R.id.rv_Product);
