@@ -3,6 +3,7 @@ package com.cromero.asociacionisaycristian.controllers;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cromero.asociacionisaycristian.EditProductActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 
@@ -103,7 +105,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        Toast.makeText(context, "Opcion 1 Elegida", Toast.LENGTH_SHORT).show();
+                        context.startActivity(new Intent(context, EditProductActivity.class));
                         break;
                     case 1:
                         deleteConfirmation(view, idProduct, nameProduct);

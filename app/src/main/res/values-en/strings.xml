@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Layout hints and texts-->
+    <string name="add">Add</string>
     <string name="register_text">Register</string>
     <string name="login_Text">Log in</string>
     <string name="password">Password</string>
@@ -11,6 +12,11 @@
     <string name="username">Username</string>
     <string name="addStore_HintID">Store ID</string>
     <string name="addStore_hintName">Store Name</string>
+    <string name="addProduct_HintId">Product Id</string>
+    <string name="addProduct_HintName">Product name</string>
+    <string name="addProduct_HintDescription">Small description</string>
+    <string name="addProduct_HintPrice">Product price</string>
+    <string name="addProduct_HintStock">Available stock</string>
 
     <!--Toast messages-->
     <string name="succes_register">Successful sign uo</string>
