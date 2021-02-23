@@ -49,7 +49,7 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getBaseContext(), AddProductActivity.class);
-                intent.putExtra("idStore",idStore);
+                intent.putExtra("store",selectedStore);
                 startActivity(intent);
             }
         });

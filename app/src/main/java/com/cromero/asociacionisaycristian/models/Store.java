@@ -35,4 +35,6 @@ public class Store implements Serializable {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
+    public void addProduct(Product pr){products.add(pr);}
 }
