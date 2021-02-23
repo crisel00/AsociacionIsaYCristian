@@ -16,14 +16,6 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_AddProductName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/addProduct_HintName" />
-
-        <EditText
             android:id="@+id/et_AddProductId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,6 +23,14 @@
             android:ems="10"
             android:hint="@string/addProduct_HintId"
             android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/et_AddProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/addProduct_HintName" />
 
         <EditText
             android:id="@+id/et_AddProductPrice"
