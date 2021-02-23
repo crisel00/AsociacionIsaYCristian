@@ -6,24 +6,24 @@ public class
 Product implements Serializable {
     String description;
     Float stock, price;
-    IdProduct idProduct;
+    String idProduct;
 
     public Product() {
     }
 
-    public Product(IdProduct idProduct, String description, Float price, Float stock) {
+    public Product(String idProduct, String description, Float price, Float stock) {
         this.idProduct = idProduct;
         this.description = description;
         this.price = price;
         this.stock= stock;
     }
 
-    public Product(IdProduct idProduct, Float price) {
+    public Product(String idProduct, Float price) {
         this.idProduct = idProduct;
         this.price = price;
     }
 
-    public IdProduct getIdProduct() {
+    public String getIdProduct() {
         return idProduct;
     }
 
