@@ -28,6 +28,7 @@ public class ProductsActivity extends AppCompatActivity {
     private RecyclerView recView;
     //Object variables
     private Store selectedStore;
+    String idStore;
     private Intent intent;
     private ArrayList<Product> products;
     //Database variables
@@ -41,7 +42,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         //The storeId is recovered
         intent = getIntent();
-        String idStore= intent.getStringExtra("idStore");
+        idStore= intent.getStringExtra("idStore");
 
         //FloatingActionButton Listener
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addProduct);
@@ -49,7 +50,7 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getBaseContext(), AddProductActivity.class);
-                intent.putExtra("idStore",idStore);
+                intent.putExtra("store",selectedStore);
                 startActivity(intent);
             }
         });
@@ -84,7 +85,7 @@ public class ProductsActivity extends AppCompatActivity {
                     products= (ArrayList<Product>) selectedStore.getProducts();
 
                     //Assignment of the Recycler View adapter with the product list
-                    AdapterProduct adapter = new AdapterProduct(products);
+                    AdapterProduct adapter = new AdapterProduct(products,selectedStore);
                     recView.setAdapter(adapter);
 
                 }

@@ -2,6 +2,7 @@ package com.cromero.asociacionisaycristian.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Store implements Serializable {
@@ -34,5 +35,23 @@ public class Store implements Serializable {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public  void editProducts(Product product){
+        List<Product> editedProducts= new ArrayList<>();
+        //The product list of the store is iterated
+        for (int i = 0; i<products.size(); i++){
+            Product myProduct= products.get(i);
+
+            //If a product is the product being edited (same id) it is replaced by the new product
+            if (myProduct.getIdProduct()==product.getIdProduct()){
+                myProduct=product;
+            }
+            //The products are added to the new list
+            editedProducts.add(myProduct);
+        }
+        //Finally the list is added to the store
+        products.clear();
+        products=editedProducts;
     }
 }

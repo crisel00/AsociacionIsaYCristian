@@ -16,16 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cromero.asociacionisaycristian.EditProductActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
+import com.cromero.asociacionisaycristian.models.Store;
 
 import java.util.ArrayList;
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterProductViewHolder> {
     private ArrayList<Product> products;
+    private  Store store;
     private Context context;
 
     //AdapterStore's constructor
-    public AdapterProduct(ArrayList<Product> products) {
+    public AdapterProduct(ArrayList<Product> products, Store store) {
         this.products = products;
+        this.store=store;
     }
 
     @NonNull
@@ -107,6 +110,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
                     case 0:
                         Intent intent =new Intent(context, EditProductActivity.class);
                         intent.putExtra("idProduct",idProduct);
+                        intent.putExtra("store", store);
                         context.startActivity(intent);
                         break;
                     case 1:
