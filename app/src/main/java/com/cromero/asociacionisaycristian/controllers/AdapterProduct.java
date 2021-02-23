@@ -105,7 +105,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        context.startActivity(new Intent(context, EditProductActivity.class));
+                        Intent intent =new Intent(context, EditProductActivity.class);
+                        intent.putExtra("idProduct",idProduct);
+                        context.startActivity(intent);
                         break;
                     case 1:
                         deleteConfirmation(view, idProduct, nameProduct);
