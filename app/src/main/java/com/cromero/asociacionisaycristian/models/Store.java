@@ -2,7 +2,6 @@ package com.cromero.asociacionisaycristian.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class Store implements Serializable {
@@ -54,4 +53,6 @@ public class Store implements Serializable {
         products.clear();
         products=editedProducts;
     }
+
+    public void addProduct(Product pr){products.add(pr);}
 }
