@@ -1,5 +1,6 @@
 package com.cromero.asociacionisaycristian;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,8 @@ public class StoreManagement extends Fragment {
             }
         });
 
+        bt_addStore = getActivity().findViewById(R.id.fab_addStore);
+
         //RecyclerView initialization
         recView = (RecyclerView) view.findViewById(R.id.rv_Store);
 
@@ -92,6 +95,13 @@ public class StoreManagement extends Fragment {
         //Assignment of the Recycler View adapter with the user list
         AdapterStore adapter = new AdapterStore(stores);
         recView.setAdapter(adapter);
+
+        bt_addStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(),view_addStore.class));
+            }
+        });
     }
 
 
