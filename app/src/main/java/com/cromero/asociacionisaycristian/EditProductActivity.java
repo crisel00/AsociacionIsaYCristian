@@ -64,7 +64,7 @@ public class EditProductActivity extends AppCompatActivity {
         et_AddProductPrice.setText(productObject.getPrice().toString());
         et_AddProductDescription.setText(productObject.getDescription());
         et_AddProductStock.setText(productObject.getStock().toString());
-        bt_addProduct_cancel.setText(getString(R.string.edit));
+        bt_addProduct_confirm.setText(getString(R.string.edit));
 
 
         bt_addProduct_confirm.setOnClickListener(new View.OnClickListener() {
@@ -91,5 +91,16 @@ public class EditProductActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        bt_addProduct_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
+
 }
+
+

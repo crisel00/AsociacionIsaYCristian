@@ -58,10 +58,6 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
             public void onClick(View v) {
                 //When an item is pressed an option menu will be showed
                 showDialog(v,idStore,nameStore);
-
-               /* Intent intent= new Intent(context, Chat.class);
-                intent.putExtra("uidContact",storeItem.uid);
-                context.startActivity(intent);*/
             }
         });
 
