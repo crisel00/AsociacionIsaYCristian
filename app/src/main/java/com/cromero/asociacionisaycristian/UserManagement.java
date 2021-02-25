@@ -71,22 +71,6 @@ public class UserManagement extends Fragment {
 
         users = new ArrayList<User>();
 
-        /*User user=new User("a@a.a", "patata","01");
-        user.setBalance(0);
-        users.add(user);
-        user=new User("b@b.b", "AAAA","02");
-        user.setBalance(1000);
-        users.add(user);
-        user=new User("b@111.awds", "patata","03");
-        user.setBalance((long)80.9);
-        users.add(user);
-        user=new User("asdsd@sd.a", "patata","04");
-        user.setBalance((long)90.0129);
-        users.add(user);
-        user=new User("fas@fsaf.sfaf", "patata","05");
-        user.setBalance((long)78.9);
-        users.add(user);*/
-
         //Database initialization
         database = FirebaseDatabase.getInstance();
         dbReference = database.getReference().child("User");
