@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddProductActivity extends AppCompatActivity {
 
-    Button bt_addProduct;
+    Button bt_addProduct,bt_cancel;
     EditText et_AddProductName, et_AddProductPrice, et_AddProductDescription, et_AddProductStock, et_AddProductId;
     Store store;
 
@@ -26,6 +26,7 @@ public class AddProductActivity extends AppCompatActivity {
         store = (Store) getIntent().getSerializableExtra("store");
 
         bt_addProduct = findViewById(R.id.bt_addProduct_confirm);
+        bt_cancel = findViewById(R.id.bt_addProduct_cancel);
 
         et_AddProductId = findViewById(R.id.et_AddProductId);
         et_AddProductName = findViewById(R.id.et_AddProductName);
@@ -46,19 +47,37 @@ public class AddProductActivity extends AppCompatActivity {
                     price = Float.parseFloat(et_AddProductPrice.getText().toString());
                     stock = Float.parseFloat(et_AddProductStock.getText().toString());
 
-                    Product pr = new Product(id,name,description,price,stock);
+                    Boolean existe = false;
+                    for(Product pr : store.getProducts()){
+                        if(pr.getIdProduct().equals(id)){
+                            existe = true;
+                        }
+                    }
 
-                    store.addProduct(pr);
+                    if(!existe){
+                        Product pr = new Product(id,name,description,price,stock);
 
-                    FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore()).setValue(store);
+                        store.addProduct(pr);
 
-                    Toast.makeText(getBaseContext(),getString(R.string.product_added),Toast.LENGTH_LONG).show();
+                        FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore()).setValue(store);
 
-                    finish();
+                        Toast.makeText(getBaseContext(),getString(R.string.product_added),Toast.LENGTH_LONG).show();
+
+                        finish();
+                    } else {
+                        Toast.makeText(getBaseContext(),"La id ya existe, introduzca otra id", Toast.LENGTH_LONG).show();
+                    }
 
                 } else {
                     Toast.makeText(getBaseContext(),getString(R.string.empty_fields),Toast.LENGTH_SHORT);
                 }
+            }
+        });
+
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
