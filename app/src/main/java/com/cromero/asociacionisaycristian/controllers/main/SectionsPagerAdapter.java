@@ -1,7 +1,6 @@
-package com.cromero.asociacionisaycristian.ui.main;
+package com.cromero.asociacionisaycristian.controllers.main;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;

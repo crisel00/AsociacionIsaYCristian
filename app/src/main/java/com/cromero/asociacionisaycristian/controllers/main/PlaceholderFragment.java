@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian.ui.main;
+package com.cromero.asociacionisaycristian.controllers.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
