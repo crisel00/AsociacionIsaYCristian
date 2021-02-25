@@ -52,6 +52,8 @@ public class AddProductActivity extends AppCompatActivity {
 
                     FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore()).setValue(store);
 
+                    Toast.makeText(getBaseContext(),getString(R.string.product_added),Toast.LENGTH_LONG).show();
+
                     finish();
 
                 } else {

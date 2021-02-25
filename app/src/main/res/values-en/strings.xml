@@ -45,4 +45,7 @@
     <string name="edit"> Edit</string>
     <string name="cancelled"> Cancelled</string>
     <string name="empty_fields">Por favor rellene todos los campos</string>
+    <string name="product_added">Product added</string>
+    <string name="product_edited">Product editted</string>
+
 </resources>

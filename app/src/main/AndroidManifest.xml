@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsociacionIsaYCristian">
         <activity android:name=".AddProductActivity"></activity>
-        <activity android:name=".EditProductActivity" />
+        <activity android:name=".EditProductActivity"
+            android:noHistory = "true"/>
         <activity android:name=".ProductsActivity" />
         <activity android:name=".view_addStore" />
         <activity android:name=".TabbedActivity" />

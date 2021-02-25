@@ -27,8 +27,9 @@ public class EditProductActivity extends AppCompatActivity {
     private FirebaseDatabase database;
 
     //Objects
-    private String  idProduct;
+    private Product productObject;
     private Store store;
+    private String idProduct;
     List<Product> products;
     List<Product> editedProducts= new ArrayList<Product>();
 
@@ -39,8 +40,9 @@ public class EditProductActivity extends AppCompatActivity {
 
         //Intents extracted
         Intent intent= getIntent();
-        idProduct= intent.getStringExtra("idProduct");
+        productObject = (Product) intent.getSerializableExtra("product");
         store= (Store) intent.getSerializableExtra("store");
+        idProduct=productObject.getIdProduct();
 
         //Firebase database initialization
         database= FirebaseDatabase.getInstance();
@@ -54,10 +56,15 @@ public class EditProductActivity extends AppCompatActivity {
         et_AddProductStock= findViewById(R.id.et_AddProductStock);
         bt_addProduct_confirm= findViewById(R.id.bt_addProduct_confirm);
         bt_addProduct_cancel= findViewById(R.id.bt_addProduct_cancel);
-
         //The id edit text is disabled
         et_AddProductId.setEnabled(false);
+
         et_AddProductId.setText(idProduct);
+        et_AddProductName.setText(productObject.getProductName());
+        et_AddProductPrice.setText(productObject.getPrice().toString());
+        et_AddProductDescription.setText(productObject.getDescription());
+        et_AddProductStock.setText(productObject.getStock().toString());
+        bt_addProduct_cancel.setText(getString(R.string.edit));
 
 
         bt_addProduct_confirm.setOnClickListener(new View.OnClickListener() {
@@ -73,16 +80,16 @@ public class EditProductActivity extends AppCompatActivity {
                     Product product=new Product(idProduct,name,description,price,stock);
                     store.editProducts(product);
 
-                     dbReference.child(store.getIdStore()).setValue(store);
-                     Toast.makeText(getBaseContext(),"aaa",Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getBaseContext(),"getString(R.string.empty_fields)",Toast.LENGTH_SHORT);
-                }
+                    //The store is added to the database
+                    String id=store.getIdStore();
+                     dbReference.child(id).setValue(store);
 
+                     Toast.makeText(getBaseContext(),getString(R.string.product_edited),Toast.LENGTH_LONG).show();
+                     finish();
+                } else {
+                    Toast.makeText(getBaseContext(),getString(R.string.empty_fields),Toast.LENGTH_SHORT);
+                }
             }
         });
-
-
-
     }
 }

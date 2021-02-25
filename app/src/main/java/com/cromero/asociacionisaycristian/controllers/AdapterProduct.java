@@ -64,7 +64,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
             @Override
             public void onClick(View v) {
                 //When an item is pressed an option menu will be showed
-               showDialog(v, idProduct, nameProduct);
+               showDialog(v, productItem);
             }
         });
 
@@ -96,10 +96,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
     }
 
     //OptionDialog creation method
-    private void showDialog(View view, String idProduct, String nameProduct) {
+    private void showDialog(View view, Product productItem) {
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
-        optionDialog.setTitle(nameProduct);
+        optionDialog.setTitle(productItem.getProductName());
 
         //Options creation
         CharSequence opciones[] = {view.getResources().getText(R.string.edit), view.getResources().getText(R.string.delete)};
@@ -109,12 +109,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.AdapterP
                 switch (item) {
                     case 0:
                         Intent intent =new Intent(context, EditProductActivity.class);
-                        intent.putExtra("idProduct",idProduct);
+                        intent.putExtra("product",productItem);
                         intent.putExtra("store", store);
                         context.startActivity(intent);
                         break;
                     case 1:
-                        deleteConfirmation(view, idProduct, nameProduct);
+                        deleteConfirmation(view, productItem.getIdProduct(), productItem.getProductName());
                         break;
                 }
             }

@@ -43,7 +43,7 @@ public class Store implements Serializable {
             Product myProduct= products.get(i);
 
             //If a product is the product being edited (same id) it is replaced by the new product
-            if (myProduct.getIdProduct()==product.getIdProduct()){
+            if (myProduct.getIdProduct().equals(product.getIdProduct())){
                 myProduct=product;
             }
             //The products are added to the new list
