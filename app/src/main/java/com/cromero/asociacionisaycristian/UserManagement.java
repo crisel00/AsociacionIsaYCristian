@@ -71,7 +71,7 @@ public class UserManagement extends Fragment {
 
         users = new ArrayList<User>();
 
-        User user=new User("a@a.a", "patata","01");
+        /*User user=new User("a@a.a", "patata","01");
         user.setBalance(0);
         users.add(user);
         user=new User("b@b.b", "AAAA","02");
@@ -85,16 +85,16 @@ public class UserManagement extends Fragment {
         users.add(user);
         user=new User("fas@fsaf.sfaf", "patata","05");
         user.setBalance((long)78.9);
-        users.add(user);
+        users.add(user);*/
 
         //Database initialization
         database = FirebaseDatabase.getInstance();
         dbReference = database.getReference().child("User");
 
 
-        //Assignment of the Recycler View adapter with the user list
-        AdapterUser adapter = new AdapterUser(users);
-        recView.setAdapter(adapter);
+        //EventListener asignation
+        setEventListener();
+        dbReference.addValueEventListener(eventListener);
     }
 
     //Database listener
@@ -103,15 +103,14 @@ public class UserManagement extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    //The current store is extracted
-                    /*selectedStore = dataSnapshot.getValue(Store.class);
-                    //Products list is refilled
-                    users= (ArrayList<Product>) dataSnapshot.getValue(Store.class);
-
-                    //Assignment of the Recycler View adapter with the product list
-                    AdapterProduct adapter = new AdapterProduct(products,selectedStore);
-                    recView.setAdapter(adapter);*/
-
+                    //The users are added to the recycler view
+                    Iterable<DataSnapshot> datos = dataSnapshot.getChildren();
+                    for(DataSnapshot snap: datos){
+                        users.add(snap.getValue(User.class));
+                    }
+                    //Assignment of the Recycler View adapter with the user list
+                    AdapterUser adapter = new AdapterUser(users);
+                    recView.setAdapter(adapter);
                 }
             }
 
