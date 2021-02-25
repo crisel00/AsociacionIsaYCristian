@@ -48,8 +48,10 @@
     <string name="product_added">Product added</string>
     <string name="product_edited">Product editted</string>
 
-    <!--Adapter Store and Product texts-->
+    <!--Adapter User and Order texts-->
     <string name="setBalance">Grant balance</string>
     <string name="viewOrders">View orders</string>
+    <string name="outstanding">Outstanding</string>
+    <string name="collected">Collected</string>
 
 </resources>
