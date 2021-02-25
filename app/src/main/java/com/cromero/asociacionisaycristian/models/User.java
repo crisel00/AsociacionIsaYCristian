@@ -7,7 +7,7 @@ import java.util.List;
 public class User implements Serializable {
     private String userName, email, uid;
     private List<OrderLine> orders= new ArrayList<>();
-    private float saldo;
+    private float balance;
 
     public User (){
 
@@ -16,7 +16,7 @@ public class User implements Serializable {
         this.email= email;
         this.userName=userName;
         this.uid=uid;
-        this.saldo = 0;
+        this.balance = 0;
     }
 
     public String getUserName() {
@@ -43,5 +43,9 @@ public class User implements Serializable {
         this.orders = orders;
     }
 
-    public float getSaldo() { return saldo; }
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    public float getBalance() { return balance; }
 }

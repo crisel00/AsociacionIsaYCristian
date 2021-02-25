@@ -58,13 +58,6 @@ public class StoreManagement extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_addStore);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(getContext(), MainActivity.class));
-            }
-        });
 
         bt_addStore = getActivity().findViewById(R.id.fab_addStore);
 
