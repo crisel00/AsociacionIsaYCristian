@@ -46,15 +46,26 @@ public class AddProductActivity extends AppCompatActivity {
                     price = Float.parseFloat(et_AddProductPrice.getText().toString());
                     stock = Float.parseFloat(et_AddProductStock.getText().toString());
 
-                    Product pr = new Product(id,name,description,price,stock);
+                    Boolean existe = false;
+                    for(Product pr : store.getProducts()){
+                        if(pr.getIdProduct().equals(id)){
+                            existe = true;
+                        }
+                    }
 
-                    store.addProduct(pr);
+                    if(!existe){
+                        Product pr = new Product(id,name,description,price,stock);
 
-                    FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore()).setValue(store);
+                        store.addProduct(pr);
 
-                    Toast.makeText(getBaseContext(),getString(R.string.product_added),Toast.LENGTH_LONG).show();
+                        FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore()).setValue(store);
 
-                    finish();
+                        Toast.makeText(getBaseContext(),getString(R.string.product_added),Toast.LENGTH_LONG).show();
+
+                        finish();
+                    } else {
+                        Toast.makeText(getBaseContext(),"La id ya existe, introduzca otra id", Toast.LENGTH_LONG);
+                    }
 
                 } else {
                     Toast.makeText(getBaseContext(),getString(R.string.empty_fields),Toast.LENGTH_SHORT);
