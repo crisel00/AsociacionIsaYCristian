@@ -29,8 +29,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -166,10 +169,26 @@ public class login_fragment extends Fragment {
                     FirebaseUser user = mAuth.getCurrentUser();
 
                     String uid = user.getUid();
-                    User userObject= new User(user.getEmail(),user.getDisplayName(),uid);
-                    dbReference.child("User").child(uid).setValue(userObject);
 
-                    startActivity(new Intent(getContext(),TabbedActivity.class));
+                    dbReference.child("User").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                startActivity(new Intent(getContext(),TabbedActivity.class));
+                                Toast.makeText(getContext(),R.string.sesion_ok, Toast.LENGTH_LONG).show();
+                            } else {
+                                User userObject= new User(user.getEmail(),user.getDisplayName(),uid);
+                                dbReference.child("User").child(uid).setValue(userObject);
+
+                                startActivity(new Intent(getContext(),TabbedActivity.class));
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 } else{
                     Toast.makeText(getContext(),R.string.error_register, Toast.LENGTH_LONG).show();
                 }
