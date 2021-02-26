@@ -78,7 +78,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         }
 
         //The order data are put into the layout
-        holder.tv_orderId.setText(orderId);
+        holder.tv_orderId.setText(orderId.toString());
         holder.tv_orderDate.setText(formattedDate);
         holder.tv_orderStatus.setText(statusInString);
 
