@@ -66,7 +66,7 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserVie
         holder.tv_userBalance.setText(String.valueOf(userBalance)+"€");
 
         //Each item will have an OnClickListener
-       holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Database initialization
