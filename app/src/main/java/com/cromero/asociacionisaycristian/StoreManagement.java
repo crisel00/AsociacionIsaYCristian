@@ -112,12 +112,6 @@ public class StoreManagement extends Fragment {
                     AdapterStore adapter = new AdapterStore(stores);
                     recView.setAdapter(adapter);
 
-                } else {
-                    Store store = new Store("ST_0101", "random_store");
-                    dbRefenrece.child("stores").child(store.getIdStore()).setValue(store);
-
-                    store = new Store("Basement", "Help");
-                    dbRefenrece.child("stores").child(store.getIdStore()).setValue(store);
                 }
             }
 
