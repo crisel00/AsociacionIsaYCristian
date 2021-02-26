@@ -103,6 +103,7 @@ public class StoreManagement extends Fragment {
         dbRefenrece.child("stores").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                stores.clear();
                 if(snapshot.exists()){
 
                     Iterable<DataSnapshot> datos = snapshot.getChildren();
