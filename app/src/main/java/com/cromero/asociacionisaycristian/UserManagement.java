@@ -87,6 +87,7 @@ public class UserManagement extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    users.clear();
                     //The users are added to the recycler view
                     Iterable<DataSnapshot> datos = dataSnapshot.getChildren();
                     for(DataSnapshot snap: datos){

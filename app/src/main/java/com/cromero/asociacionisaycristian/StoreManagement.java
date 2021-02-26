@@ -104,7 +104,6 @@ public class StoreManagement extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-
                     stores.clear();
                     Iterable<DataSnapshot> datos = snapshot.getChildren();
                     for(DataSnapshot snap: datos){
@@ -112,7 +111,6 @@ public class StoreManagement extends Fragment {
                     }
                     AdapterStore adapter = new AdapterStore(stores);
                     recView.setAdapter(adapter);
-
                 }
             }
 
