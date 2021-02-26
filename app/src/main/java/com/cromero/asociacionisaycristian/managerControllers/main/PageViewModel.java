@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian.controllers.main;
+package com.cromero.asociacionisaycristian.managerControllers.main;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

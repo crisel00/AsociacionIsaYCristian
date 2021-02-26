@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian;
+package com.cromero.asociacionisaycristian.managerViews;
 
 import android.os.Bundle;
 
@@ -12,16 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cromero.asociacionisaycristian.controllers.AdapterOrder;
-import com.cromero.asociacionisaycristian.controllers.AdapterUser;
+import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.managerControllers.AdapterOrder;
 import com.cromero.asociacionisaycristian.models.Order;
-import com.cromero.asociacionisaycristian.models.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

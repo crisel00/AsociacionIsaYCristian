@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian.controllers;
+package com.cromero.asociacionisaycristian.managerControllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cromero.asociacionisaycristian.ProductsActivity;
+import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Order;
 import com.cromero.asociacionisaycristian.models.User;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrderViewHolder> {
+public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.AdapterOrderLineViewHolder> {
     private ArrayList<Order> orders;
     private Context context;
     //Database variables
@@ -35,7 +35,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
     private DatabaseReference dbReference;
 
     //AdapterOrder's constructor
-    public AdapterOrder(ArrayList<Order> orders) {
+    public AdapterOrderLine(ArrayList<Order> orders) {
         this.orders = orders;
 
         //Database initialization
@@ -46,18 +46,18 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
 
     @NonNull
     @Override
-    public AdapterOrder.AdapterOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterOrderLine.AdapterOrderLineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //The view is inflated
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_item, parent, false);
+                .inflate(R.layout.orderline_item, parent, false);
 
         //The view holder is created
-        AdapterOrder.AdapterOrderViewHolder avh=new AdapterOrder.AdapterOrderViewHolder((itemView));
+        AdapterOrderLine.AdapterOrderLineViewHolder avh=new AdapterOrderLine.AdapterOrderLineViewHolder((itemView));
         return avh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterOrder.AdapterOrderViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterOrderLine.AdapterOrderLineViewHolder holder, int position) {
         Order orderItem = orders.get(position);
 
         String orderId = orderItem.getOrderId();
@@ -103,12 +103,12 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
     }
 
 
-    public class AdapterOrderViewHolder  extends RecyclerView.ViewHolder {
+    public class AdapterOrderLineViewHolder  extends RecyclerView.ViewHolder {
         //Layout items
         private TextView tv_orderId, tv_orderDate, tv_orderStatus;
 
         //ViewHolder constructor
-        public AdapterOrderViewHolder(View itemView) {
+        public AdapterOrderLineViewHolder(View itemView) {
             super(itemView);
 
             //The context is given the correct value
@@ -122,7 +122,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
     }
 
     //OptionDialog creation method
-    private void showDialog(View view,User user) {
+    private void showDialog(View view, User user) {
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
         optionDialog.setTitle(user.getUserName());
@@ -184,3 +184,4 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         alertDialog.show();
     }
 }
+

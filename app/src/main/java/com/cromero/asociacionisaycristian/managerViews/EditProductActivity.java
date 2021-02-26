@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian;
+package com.cromero.asociacionisaycristian.managerViews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.google.firebase.database.DatabaseReference;

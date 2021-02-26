@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian.controllers.main;
+package com.cromero.asociacionisaycristian.managerControllers.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cromero.asociacionisaycristian.OrderManagement;
+import com.cromero.asociacionisaycristian.managerViews.OrderManagement;
 import com.cromero.asociacionisaycristian.R;
-import com.cromero.asociacionisaycristian.StoreManagement;
-import com.cromero.asociacionisaycristian.UserManagement;
+import com.cromero.asociacionisaycristian.managerViews.StoreManagement;
+import com.cromero.asociacionisaycristian.managerViews.UserManagement;
 
 /**
  * A placeholder fragment containing a simple view.

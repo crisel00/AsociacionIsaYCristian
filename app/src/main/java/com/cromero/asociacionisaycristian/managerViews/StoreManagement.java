@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian;
+package com.cromero.asociacionisaycristian.managerViews;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cromero.asociacionisaycristian.controllers.AdapterStore;
+import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.managerControllers.AdapterStore;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.cromero.asociacionisaycristian.login_fragment"
+        android:name="com.cromero.asociacionisaycristian.managerViews.login_fragment"
         android:label="fragment_login_fragment"
         tools:layout="@layout/fragment_login_fragment" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.cromero.asociacionisaycristian.RegisterFragment"
+        android:name="com.cromero.asociacionisaycristian.managerViews.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>

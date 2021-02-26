@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian;
+package com.cromero.asociacionisaycristian.managerViews;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,10 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.cromero.asociacionisaycristian.controllers.AdapterProduct;
-import com.cromero.asociacionisaycristian.controllers.AdapterStore;
+import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.managerControllers.AdapterProduct;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

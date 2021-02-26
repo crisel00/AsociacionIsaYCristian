@@ -1,4 +1,4 @@
-package com.cromero.asociacionisaycristian.controllers;
+package com.cromero.asociacionisaycristian.managerControllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cromero.asociacionisaycristian.EditProductActivity;
+import com.cromero.asociacionisaycristian.managerViews.EditProductActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
