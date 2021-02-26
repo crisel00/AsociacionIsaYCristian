@@ -136,4 +136,6 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
         AlertDialog alertDialog = alertDialogBu.create();
         alertDialog.show();
     }
+
+
 }

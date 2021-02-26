@@ -49,8 +49,10 @@
     <string name="product_added">Producto añadido</string>
     <string name="product_edited">Producto editado</string>
 
-    <!--Adapter Store and Product texts-->
+    <!--Adapter User and Order texts-->
     <string name="setBalance">Conceder saldo</string>
     <string name="viewOrders">Ver pedidos</string>
+    <string name="outstanding">Pendiente</string>
+    <string name="collected">Recogido</string>
 
 </resources>
