@@ -34,7 +34,7 @@
     <string name="tab_stores">Stores</string>
     <string name="tab_orders">Orders</string>
 
-    <!--Adapter Store texts-->
+    <!--Adapter Store and Product texts-->
     <string name="manage">Manage</string>
     <string name="delete">Delete</string>
     <string name="are_you_sure">Are you sure you want to delete \ </string>
@@ -44,8 +44,12 @@
     <string name="cancel">Cancel</string>
     <string name="edit"> Edit</string>
     <string name="cancelled"> Cancelled</string>
-    <string name="empty_fields">Por favor rellene todos los campos</string>
+    <string name="empty_fields">Please fill all the fields</string>
     <string name="product_added">Product added</string>
     <string name="product_edited">Product editted</string>
+
+    <!--Adapter Store and Product texts-->
+    <string name="setBalance">Grant balance</string>
+    <string name="viewOrders">View orders</string>
 
 </resources>

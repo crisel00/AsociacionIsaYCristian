@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,17 +19,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cromero.asociacionisaycristian.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserViewHolder> {
     private ArrayList<User> users;
     private Context context;
+    //Database variables
+    private FirebaseDatabase database;
+    private DatabaseReference dbReference;
 
     //AdapterUser's constructor
     public AdapterUser(ArrayList<User> users) {
-
         this.users = users;
+
+        //Database initialization
+        database = FirebaseDatabase.getInstance();
+        dbReference = database.getReference().child("User");
 
     }
 
@@ -48,19 +59,24 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserVie
         String username = userItem.getUserName();
         String userEmail = userItem.getEmail();
         float userBalance = userItem.getBalance();
+
         //The store data are put into the layout
         holder.tv_username.setText(username);
         holder.tv_userEmail.setText(userEmail);
         holder.tv_userBalance.setText(String.valueOf(userBalance)+"€");
 
         //Each item will have an OnClickListener
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Database initialization
+                database = FirebaseDatabase.getInstance();
+                dbReference = database.getReference().child("User").child(userItem.getUid());
+
                 //When an item is pressed an option menu will be showed
-                showDialog(v,idStore,nameStore);
+                showDialog(v,userItem);
             }
-        });*/
+        });
 
     }
 
@@ -89,24 +105,24 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserVie
     }
 
     //OptionDialog creation method
-    private void showDialog(View view, String idStore, String nameStore) {
+    private void showDialog(View view,User user) {
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
-        optionDialog.setTitle(nameStore);
+        optionDialog.setTitle(user.getUserName());
 
         //Options creation
-        CharSequence opciones[] = {view.getResources().getText(R.string.manage), view.getResources().getText(R.string.delete)};
+        CharSequence opciones[] = {view.getResources().getText(R.string.viewOrders),view.getResources().getText(R.string.setBalance)};
         //OnClickMethod for each option
         optionDialog.setItems(opciones, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
                         Intent intent = new Intent(context, ProductsActivity.class);
-                        intent.putExtra("idStore", idStore);
+                        intent.putExtra("user",user);
                         context.startActivity(intent);
                         break;
                     case 1:
-                        deleteConfirmation(view, idStore, nameStore);
+                        grantBalanceDialog(view, user);
                         break;
                 }
             }
@@ -116,26 +132,38 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserVie
         alertDialog.show();
     }
 
-    private void deleteConfirmation(View view, String idStore, String nameStore) {
+    private void grantBalanceDialog(View view, User user) {
         //Initialization
-        AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
-        alertDialogBu.setTitle(view.getResources().getText(R.string.delete));
-        alertDialogBu.setMessage(view.getResources().getText(R.string.are_you_sure) + nameStore + view.getResources().getText(R.string.cant_undo));
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(user.getEmail());
+        alertDialog.setMessage(view.getResources().getText(R.string.setBalance));
 
-        //Positive option
-        alertDialogBu.setPositiveButton(view.getResources().getText(R.string.accept), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, nameStore + view.getResources().getText(R.string.is_deleted), Toast.LENGTH_SHORT).show();
-            }
-        });
-        //Negative option
-        alertDialogBu.setNegativeButton(view.getResources().getText(R.string.cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, view.getResources().getText(R.string.cancelled), Toast.LENGTH_SHORT).show();
-            }
-        });
-        //Dialog creation
-        AlertDialog alertDialog = alertDialogBu.create();
+        //Layout
+        final EditText input = new EditText(context);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+
+        //Accept
+        alertDialog.setPositiveButton(view.getResources().getText(R.string.accept),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        float balance = Float.parseFloat(input.getText().toString());
+                        float oldBalance= user.getBalance();
+                        user.setBalance(oldBalance+balance);
+                        dbReference.setValue(user);
+                    }
+                });
+        //Cancel
+        alertDialog.setNegativeButton(view.getResources().getText(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
         alertDialog.show();
     }
 }
