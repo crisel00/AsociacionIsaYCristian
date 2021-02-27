@@ -53,5 +53,6 @@
     <string name="viewOrders">View orders</string>
     <string name="outstanding">Outstanding</string>
     <string name="collected">Collected</string>
+    <string name="check">Comprobar</string>
 
 </resources>

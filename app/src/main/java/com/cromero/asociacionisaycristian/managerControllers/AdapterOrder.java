@@ -82,18 +82,18 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         holder.tv_orderDate.setText(formattedDate);
         holder.tv_orderStatus.setText(statusInString);
 
-        /*//Each item will have an OnClickListener
+        //Each item will have an OnClickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(v) {
+            public void onClick(View v) {
                 //Database initialization
                 database = FirebaseDatabase.getInstance();
-                dbReference = database.getReference().child("User").child(orderItem.getUid());
+                dbReference = database.getReference().child("User").child(orderItem.getUserID());
 
                 //When an item is pressed an option menu will be showed
                 showDialog(v,orderItem);
             }
-        });*/
+        });
 
     }
 
@@ -122,65 +122,30 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
     }
 
     //OptionDialog creation method
-    private void showDialog(View view,User user) {
+    private void showDialog(View view,Order order) {
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
-        optionDialog.setTitle(user.getUserName());
+        optionDialog.setTitle(order.getOrderId());
 
         //Options creation
-        CharSequence opciones[] = {view.getResources().getText(R.string.viewOrders),view.getResources().getText(R.string.setBalance)};
+        CharSequence opciones[] = {context.getString(R.string.manage),context.getString(R.string.delete)};
         //OnClickMethod for each option
         optionDialog.setItems(opciones, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
                         Intent intent = new Intent(context, ProductsActivity.class);
-                        intent.putExtra("user",user);
+                        intent.putExtra("order",order);
                         context.startActivity(intent);
                         break;
                     case 1:
-                        grantBalanceDialog(view, user);
+                        //todo borrar pedido
                         break;
                 }
             }
         });
         //Dialog creation
         AlertDialog alertDialog = optionDialog.create();
-        alertDialog.show();
-    }
-
-    private void grantBalanceDialog(View view, User user) {
-        //Initialization
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-        alertDialog.setTitle(user.getEmail());
-        alertDialog.setMessage(view.getResources().getText(R.string.setBalance));
-
-        //Layout
-        final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        alertDialog.setView(input);
-
-        //Accept
-        alertDialog.setPositiveButton(view.getResources().getText(R.string.accept),
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        float balance = Float.parseFloat(input.getText().toString());
-                        float oldBalance= user.getBalance();
-                        user.setBalance(oldBalance+balance);
-                        dbReference.setValue(user);
-                    }
-                });
-        //Cancel
-        alertDialog.setNegativeButton(view.getResources().getText(R.string.cancel),
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
         alertDialog.show();
     }
 }

@@ -16,14 +16,6 @@
         <activity android:name=".userViews.User_ProductSelection"></activity>
         <activity android:name=".userViews.User_OrderManagement" />
         <activity android:name=".userViews.User_StoreSelection" />
-        <activity
-            android:name=".userControllers.User_TabbedActivity"
-            android:label="@string/title_activity_user__tabbed"
-            android:theme="@style/Theme.AsociacionIsaYCristian.NoActionBar" />
-        <activity
-            android:name=".userViews.TabbedUser"
-            android:label="@string/title_activity_tabbed_user"
-            android:theme="@style/Theme.AsociacionIsaYCristian.NoActionBar" />
         <activity android:name=".userViews.UserOrManagerActivity" />
         <activity android:name=".managerViews.AddProductActivity" />
         <activity
@@ -33,6 +25,15 @@
         <activity android:name=".managerViews.view_addStore" />
         <activity android:name=".managerViews.TabbedActivity" />
         <activity android:name=".managerViews.MainActivity">
+        <activity android:name=".UserOrdersActivity"></activity>
+        <activity android:name=".AddProductActivity" />
+        <activity
+            android:name=".EditProductActivity"
+            android:noHistory="true" />
+        <activity android:name=".ProductsActivity" />
+        <activity android:name=".view_addStore" />
+        <activity android:name=".TabbedActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,24 +1,28 @@
 package com.cromero.asociacionisaycristian.models;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Order implements Serializable {
     String orderId;
-    List<OrderLine> orderLines;
+    ArrayList<OrderLine> orderLines;
     Date orderDate;
     int status;
+    String UserID = "";
 
     public Order() {
     }
 
-    public Order(String orderId, List<OrderLine> orderLines, Date orderDate) {
+    public Order(String orderId, ArrayList<OrderLine> orderLines, Date orderDate) {
         this.orderId = orderId;
         this.orderLines = orderLines;
         this.orderDate = orderDate;
         this.status=0;
     }
+
     public Order(String orderId, Date orderDate) {
         this.orderId = orderId;
         this.orderLines = orderLines;
@@ -34,11 +38,11 @@ public class Order implements Serializable {
         this.orderId = orderId;
     }
 
-    public List<OrderLine> getOrderLines() {
+    public ArrayList<OrderLine> getOrderLines() {
         return orderLines;
     }
 
-    public void setOrderLines(List<OrderLine> orderLines) {
+    public void setOrderLines(ArrayList<OrderLine> orderLines) {
         this.orderLines = orderLines;
     }
 
@@ -56,5 +60,13 @@ public class Order implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 }

@@ -54,5 +54,6 @@
     <string name="viewOrders">Ver pedidos</string>
     <string name="outstanding">Pendiente</string>
     <string name="collected">Recogido</string>
+    <string name="check">Comprobar</string>
 
 </resources>

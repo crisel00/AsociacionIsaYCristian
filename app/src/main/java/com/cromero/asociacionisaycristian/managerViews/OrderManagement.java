@@ -34,7 +34,7 @@ public class OrderManagement extends Fragment {
     }
 
 
-    public static OrderManagement newInstance(String param1, String param2) {
+    public static OrderManagement newInstance() {
         OrderManagement fragment = new OrderManagement();
         return fragment;
     }
