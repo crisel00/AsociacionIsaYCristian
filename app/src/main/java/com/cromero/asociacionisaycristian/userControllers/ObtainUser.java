@@ -30,12 +30,7 @@ public class ObtainUser {
         setUserEventListener();
         dbUser.addValueEventListener(userEventListener);
 
-        try {
-            Thread.sleep(1000);
             ready=true;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return user;
     }
 

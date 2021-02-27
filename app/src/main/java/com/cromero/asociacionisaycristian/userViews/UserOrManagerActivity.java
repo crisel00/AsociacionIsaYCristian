@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerViews.TabbedActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class UserOrManagerActivity extends AppCompatActivity {
 
@@ -15,6 +16,10 @@ public class UserOrManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_or_manager);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            System.out.println("WWWWWAAt");
+        }
     }
 
     public void userPart(View view) {

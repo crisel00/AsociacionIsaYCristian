@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerControllers.AdapterUser;
 import com.cromero.asociacionisaycristian.models.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
