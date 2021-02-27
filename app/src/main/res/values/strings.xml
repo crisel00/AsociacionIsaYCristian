@@ -52,8 +52,9 @@
     <string name="viewOrders">Ver pedidos</string>
     <string name="outstanding">Pendiente</string>
     <string name="collected">Recogido</string>
-
-
+    <string name="title_activity_tabbed_user">TabbedUser</string>
+    <string name="title_activity_user_tabbed">UserTabbedActivity</string>
+    <string name="title_activity_user__tabbed">User_TabbedActivity</string>
 
 
 </resources>

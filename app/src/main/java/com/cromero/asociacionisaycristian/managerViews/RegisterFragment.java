@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.User;
+import com.cromero.asociacionisaycristian.userViews.UserOrManagerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -120,7 +121,7 @@ public class RegisterFragment extends Fragment {
     private void updateUI(FirebaseUser account){
         if(account != null){
             Toast.makeText(getContext(),getResources().getText(R.string.succes_register),Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getContext(),TabbedActivity.class));
+            startActivity(new Intent(getContext(), UserOrManagerActivity.class));
         }else{
             Toast. makeText(getContext(),getResources().getText(R.string.error_register),Toast. LENGTH_SHORT).show();
         }

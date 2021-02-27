@@ -13,9 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsociacionIsaYCristian">
-        <activity android:name=".managerViews.AddProductActivity"></activity>
-        <activity android:name=".managerViews.EditProductActivity"
-            android:noHistory = "true"/>
+        <activity
+            android:name=".userControllers.User_TabbedActivity"
+            android:label="@string/title_activity_user__tabbed"
+            android:theme="@style/Theme.AsociacionIsaYCristian.NoActionBar"></activity>
+        <activity
+            android:name=".userViews.TabbedUser"
+            android:label="@string/title_activity_tabbed_user"
+            android:theme="@style/Theme.AsociacionIsaYCristian.NoActionBar" />
+        <activity android:name=".userViews.UserOrManagerActivity" />
+        <activity android:name=".managerViews.AddProductActivity" />
+        <activity
+            android:name=".managerViews.EditProductActivity"
+            android:noHistory="true" />
         <activity android:name=".managerViews.ProductsActivity" />
         <activity android:name=".managerViews.view_addStore" />
         <activity android:name=".managerViews.TabbedActivity" />

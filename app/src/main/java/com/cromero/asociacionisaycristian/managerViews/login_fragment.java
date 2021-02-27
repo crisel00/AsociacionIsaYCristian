@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.User;
+import com.cromero.asociacionisaycristian.userViews.UserOrManagerActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -57,12 +58,6 @@ public class login_fragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment login_fragment.
-     */
     public static login_fragment newInstance(String param1, String param2) {
         login_fragment fragment = new login_fragment();
         Bundle args = new Bundle();
@@ -106,7 +101,7 @@ public class login_fragment extends Fragment {
                 } else {
                     if(iniciaSesion(correo,contrasena)){
                         Toast.makeText(getContext(), R.string.sesion_ok, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getContext(),TabbedActivity.class));
+                        startActivity(new Intent(getContext(), UserOrManagerActivity.class));
                     }
                 }
             }
@@ -175,13 +170,12 @@ public class login_fragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if(snapshot.exists()){
-                                    startActivity(new Intent(getContext(),TabbedActivity.class));
+                                    startActivity(new Intent(getContext(),UserOrManagerActivity.class));
                                     Toast.makeText(getContext(),R.string.sesion_ok, Toast.LENGTH_LONG).show();
                                 } else {
                                     User userObject= new User(user.getEmail(),user.getDisplayName(),uid);
                                     dbReference.child("User").child(uid).setValue(userObject);
-
-                                    startActivity(new Intent(getContext(),TabbedActivity.class));
+                                    startActivity(new Intent(getContext(),UserOrManagerActivity.class));
                                 }
                             }
 

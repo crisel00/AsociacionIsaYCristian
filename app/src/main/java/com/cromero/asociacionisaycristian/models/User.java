@@ -8,6 +8,7 @@ public class User implements Serializable {
     private String userName, email, uid;
     private List<OrderLine> orders= new ArrayList<>();
     private float balance;
+    private boolean isManager;
 
     public User (){
 
@@ -17,6 +18,7 @@ public class User implements Serializable {
         this.userName=userName;
         this.uid=uid;
         this.balance = 0;
+        isManager=false;
     }
 
     public String getUserName() {
@@ -48,4 +50,8 @@ public class User implements Serializable {
     }
 
     public float getBalance() { return balance; }
+
+    public boolean isManager(){return isManager;}
+    public void  makeManager(){isManager=true;}
+
 }
