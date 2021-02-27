@@ -14,6 +14,7 @@ import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
+import com.cromero.asociacionisaycristian.userControllers.ObtainUser;
 import com.cromero.asociacionisaycristian.userControllers.User_AdapterProduct;
 import com.firebase.ui.auth.viewmodel.AuthViewModelBase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class User_ProductSelection extends AppCompatActivity {
-    private ValueEventListener eventListener, userEventListener;
+    private ValueEventListener eventListener;
     private RecyclerView recView;
     //Object variables
     private User user;
@@ -36,19 +37,12 @@ public class User_ProductSelection extends AppCompatActivity {
     private ArrayList<Product> products;
     //Database and Firebase variables
     private FirebaseDatabase database;
-    private DatabaseReference dbReference,dbUser;
-    private FirebaseAuth mAuth;
-    private String uid;
+    private DatabaseReference dbReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__product_selection);
-
-        //todo posible cambio (mover a clase externa)
-        //Initialization of Firebase Authentication
-        mAuth = FirebaseAuth.getInstance();
-        uid= mAuth.getCurrentUser().getUid();
 
         //The storeId is recovered
         intent = getIntent();
@@ -78,13 +72,9 @@ public class User_ProductSelection extends AppCompatActivity {
         //Database initialization
         database = FirebaseDatabase.getInstance();
         dbReference = database.getReference().child("stores").child(idStore);
-        dbUser= database.getReference().child("User").child(uid);
-
         //EventListeners asignation
-        setUserEventListener();
-        dbUser.addValueEventListener(userEventListener);
-        setEventListener();
-        dbReference.addValueEventListener(eventListener);
+        //setEventListener();
+        //dbReference.addValueEventListener(eventListener);
 
     }
 
@@ -100,28 +90,8 @@ public class User_ProductSelection extends AppCompatActivity {
                     products= (ArrayList<Product>) selectedStore.getProducts();
 
                     //Assignment of the Recycler View adapter with the product list
-                    Toast.makeText(getApplicationContext(),"bbbb",Toast.LENGTH_SHORT).show();
-                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore,user);
+                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore);
                     recView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("onDataChange", "Error!", databaseError.toException());
-            }
-        };
-    }
-    //Database listener
-    public void setUserEventListener(){
-        userEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    //The current user is extracted
-                    user= dataSnapshot.getValue(User.class);
-                }else{
-                    Toast.makeText(getApplicationContext(),"aaaaa",Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -55,8 +55,6 @@ public class User_StoreSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_user__store_selection);
 
-        Toast.makeText(this,"aaaaaaaa",Toast.LENGTH_LONG).show();
-
         //RecyclerView initialization
         recView = (RecyclerView) findViewById(R.id.rv_userStore);
 

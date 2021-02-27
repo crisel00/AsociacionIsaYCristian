@@ -33,7 +33,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
     private Product productItem;
 
     //AdapterStore's constructor
-    public User_AdapterProduct(ArrayList<Product> products, Store store, User user) {
+    public User_AdapterProduct(ArrayList<Product> products, Store store) {
         this.products = products;
         this.store=store;
         this.user=user;
@@ -66,6 +66,17 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         holder.tv_priceProduct.setText(price.toString() + "€");
         holder.tv_descriptionProduct.setText(description);
         holder.tv_stock.setText(stock.toString());
+
+
+
+
+
+        if(ObtainUser.getUser()==null){
+            Toast.makeText(context,"AAAA",Toast.LENGTH_SHORT).show();
+        }else {
+
+            Toast.makeText(context,"BBBBB",Toast.LENGTH_SHORT).show();
+        }
 
         //Each item will have an OnClickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +141,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
     private void addProductToCart(float cantidad){
         OrderLine orderLine= new OrderLine(productItem,cantidad,store );
         Order cart;
+        user= ObtainUser.getUser();
         try {
             cart = user.getCart();
             user.addProductToCart(orderLine);
