@@ -6,15 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.managerControllers.AdapterOrder;
+import com.cromero.asociacionisaycristian.managerControllers.AdapterOrderLine;
 import com.cromero.asociacionisaycristian.models.Order;
 import com.cromero.asociacionisaycristian.models.OrderLine;
-import com.cromero.asociacionisaycristian.models.Product;
-import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,37 +19,37 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class UserOrdersActivity extends AppCompatActivity {
-
+public class OrderLineActivity extends AppCompatActivity {
 
     private RecyclerView recView;
-    private String userID;
     private ValueEventListener eventListener;
-    private User selectedUser;
-    private ArrayList<Order> orders;
+
+    Order order;
     private DatabaseReference dbReference;
+    private User selectedUser;
+    private ArrayList<OrderLine> lines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_orders);
+        setContentView(R.layout.activity_order_line);
 
-        recView = (RecyclerView) findViewById(R.id.rv_userOrders);
+        recView = (RecyclerView) findViewById(R.id.rv_orderLines);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recView.setLayoutManager(layoutManager);
 
-        userID = getIntent().getStringExtra("user");
+        order = (Order) getIntent().getSerializableExtra("order");
 
+        AdapterOrderLine adapter = new AdapterOrderLine(order);
+        recView.setAdapter(adapter);
 
-        dbReference = FirebaseDatabase.getInstance().getReference().child("User").child(userID);
-        setEventListener();
-        dbReference.addValueEventListener(eventListener);
+//        dbReference = FirebaseDatabase.getInstance().getReference().child("User").child(order.getUserID());
+//        setEventListener();
+//        dbReference.addValueEventListener(eventListener);
     }
 
-    //Database listener
     public void setEventListener(){
         eventListener = new ValueEventListener() {
             @Override
@@ -61,21 +58,9 @@ public class UserOrdersActivity extends AppCompatActivity {
                     //The current user is extracted
                     selectedUser = dataSnapshot.getValue(User.class);
                     //Orders list is refilled
-                    orders = (ArrayList<Order>) selectedUser.getOrders();
+                    lines = order.getOrderLines();
 
-                    if(orders.size()<1){
-                        Order  welcOrder = new Order("Bienvenido " + userID,new java.util.Date());
-
-                        OrderLine welcLine = new OrderLine(new Product("wlc_01", "welcome_product", "YES", 0, 1), 1, new Store("WLC","Welcome"));
-                        welcOrder.addLine(welcLine);
-
-                        System.out.println(selectedUser.getEmail());
-
-                        orders.add(welcOrder);
-                    }
                     //Assignment of the Recycler View adapter with the product list
-                    AdapterOrder adapter = new AdapterOrder(selectedUser.getOrders());
-                    recView.setAdapter(adapter);
 
                 }
             }

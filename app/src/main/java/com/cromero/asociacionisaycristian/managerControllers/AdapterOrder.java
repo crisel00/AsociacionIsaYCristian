@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cromero.asociacionisaycristian.OrderLineActivity;
 import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Order;
@@ -134,7 +135,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        Intent intent = new Intent(context, ProductsActivity.class);
+                        Intent intent = new Intent(context, OrderLineActivity.class);
                         intent.putExtra("order",order);
                         context.startActivity(intent);
                         break;

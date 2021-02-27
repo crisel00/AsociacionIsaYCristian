@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsociacionIsaYCristian">
-        <activity android:name=".userViews.User_ProductSelection"></activity>
+        <activity android:name=".OrderLineActivity"></activity>
+        <activity android:name=".userViews.User_ProductSelection" />
         <activity android:name=".userViews.User_OrderManagement" />
         <activity android:name=".userViews.User_StoreSelection" />
         <activity android:name=".userViews.UserOrManagerActivity" />
@@ -23,8 +24,8 @@
             android:noHistory="true" />
         <activity android:name=".managerViews.ProductsActivity" />
         <activity android:name=".managerViews.view_addStore" />
-        <activity android:name=".managerViews.TabbedActivity"/>
-        <activity android:name=".UserOrdersActivity"/>
+        <activity android:name=".managerViews.TabbedActivity" />
+        <activity android:name=".UserOrdersActivity" />
         <activity android:name=".managerViews.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,7 +10,7 @@ public class OrderLine implements Serializable {
     public OrderLine() {
     }
 
-    public OrderLine(Product product, Float amount, Store store) {
+    public OrderLine(Product product, float amount, Store store) {
         this.product = product;
         this.amount = amount;
         this.store = store;

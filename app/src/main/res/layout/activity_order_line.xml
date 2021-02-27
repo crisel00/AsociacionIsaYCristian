@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserOrdersActivity">
+    tools:context=".OrderLineActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_userOrders"
+        android:id="@+id/rv_orderLines"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="262dp" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="251dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

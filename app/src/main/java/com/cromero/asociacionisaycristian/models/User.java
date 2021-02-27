@@ -1,12 +1,13 @@
 package com.cromero.asociacionisaycristian.models;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
     private String userName, email, uid;
-    private List<Order> orders= new ArrayList<>();
+    private ArrayList<Order> orders= new ArrayList<>();
     private float balance;
     private boolean isManager;
 
@@ -19,6 +20,10 @@ public class User implements Serializable {
         this.uid=uid;
         this.balance = 0;
         isManager=false;
+    }
+
+    public void addOrder(Order order){
+            orders.add(order);
     }
 
     public String getUserName() {
@@ -37,11 +42,11 @@ public class User implements Serializable {
         return uid;
     }
 
-    public List<Order> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
 

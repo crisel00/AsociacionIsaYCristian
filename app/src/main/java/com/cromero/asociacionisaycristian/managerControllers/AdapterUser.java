@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cromero.asociacionisaycristian.UserOrdersActivity;
 import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.User;
@@ -116,8 +117,8 @@ public class AdapterUser extends RecyclerView.Adapter<AdapterUser.AdapterUserVie
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        Intent intent = new Intent(context, ProductsActivity.class);
-                        intent.putExtra("user",user);
+                        Intent intent = new Intent(context, UserOrdersActivity.class);
+                        intent.putExtra("user",user.getUid());
                         context.startActivity(intent);
                         break;
                     case 1:
