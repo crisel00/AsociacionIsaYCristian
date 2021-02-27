@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
-import com.cromero.asociacionisaycristian.managerControllers.AdapterStore;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.cromero.asociacionisaycristian.userControllers.User_AdapterStore;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,7 +69,7 @@ public class User_StoreSelection extends AppCompatActivity {
         listenStoreDatabase();
 
         //Assignment of the Recycler View adapter with the user list
-        AdapterStore adapter = new AdapterStore(stores);
+        User_AdapterStore adapter = new User_AdapterStore(stores);
         recView.setAdapter(adapter);
     }
 
@@ -83,7 +83,7 @@ public class User_StoreSelection extends AppCompatActivity {
                     for(DataSnapshot snap: datos){
                         stores.add(snap.getValue(Store.class));
                     }
-                    AdapterStore adapter = new AdapterStore(stores);
+                    User_AdapterStore adapter = new User_AdapterStore(stores);
                     recView.setAdapter(adapter);
                 }
             }
