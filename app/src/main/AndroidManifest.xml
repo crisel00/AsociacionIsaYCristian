@@ -23,17 +23,9 @@
             android:noHistory="true" />
         <activity android:name=".managerViews.ProductsActivity" />
         <activity android:name=".managerViews.view_addStore" />
-        <activity android:name=".managerViews.TabbedActivity" />
+        <activity android:name=".managerViews.TabbedActivity"/>
+        <activity android:name=".UserOrdersActivity"/>
         <activity android:name=".managerViews.MainActivity">
-        <activity android:name=".UserOrdersActivity"></activity>
-        <activity android:name=".AddProductActivity" />
-        <activity
-            android:name=".EditProductActivity"
-            android:noHistory="true" />
-        <activity android:name=".ProductsActivity" />
-        <activity android:name=".view_addStore" />
-        <activity android:name=".TabbedActivity" />
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
