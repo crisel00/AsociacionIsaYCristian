@@ -31,4 +31,12 @@ public class OrderLine implements Serializable {
     public void setAmount(Float amount) {
         this.amount = amount;
     }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 }

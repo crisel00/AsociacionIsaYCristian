@@ -122,7 +122,7 @@ public class login_fragment extends Fragment {
             }
         });
 
-        //todo Inicializar login google
+
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
