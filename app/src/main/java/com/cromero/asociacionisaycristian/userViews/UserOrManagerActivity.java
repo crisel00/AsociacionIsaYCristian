@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerViews.TabbedActivity;
-import com.cromero.asociacionisaycristian.userControllers.User_TabbedActivity;
 
 public class UserOrManagerActivity extends AppCompatActivity {
 
@@ -19,7 +18,7 @@ public class UserOrManagerActivity extends AppCompatActivity {
     }
 
     public void userPart(View view) {
-        startActivity(new Intent(this, User_TabbedActivity.class));
+        startActivity(new Intent(this, User_StoreSelection.class));
     }
 
     public void managerPart(View view) {

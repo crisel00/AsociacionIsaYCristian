@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userViews.User_StoreManagement">
+    tools:context=".userViews.cambioMomentaneo">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv_userStore"
         android:scrollbars="vertical"
-        tools:context=".userViews.User_StoreManagement">
+        tools:context=".userViews.cambioMomentaneo">
     </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
