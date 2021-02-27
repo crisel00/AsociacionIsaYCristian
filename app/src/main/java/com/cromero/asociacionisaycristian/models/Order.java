@@ -25,7 +25,7 @@ public class Order implements Serializable {
 
     public Order(String orderId, Date orderDate) {
         this.orderId = orderId;
-        this.orderLines = orderLines;
+        this.orderLines = new ArrayList<>();
         this.orderDate = orderDate;
         this.status=0;
     }

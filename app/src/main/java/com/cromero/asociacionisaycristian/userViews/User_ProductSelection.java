@@ -73,8 +73,8 @@ public class User_ProductSelection extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         dbReference = database.getReference().child("stores").child(idStore);
         //EventListeners asignation
-        //setEventListener();
-        //dbReference.addValueEventListener(eventListener);
+        setEventListener();
+        dbReference.addValueEventListener(eventListener);
 
     }
 

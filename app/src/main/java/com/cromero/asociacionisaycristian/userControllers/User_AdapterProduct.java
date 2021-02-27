@@ -67,17 +67,6 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         holder.tv_descriptionProduct.setText(description);
         holder.tv_stock.setText(stock.toString());
 
-
-
-
-
-        if(ObtainUser.getUser()==null){
-            Toast.makeText(context,"AAAA",Toast.LENGTH_SHORT).show();
-        }else {
-
-            Toast.makeText(context,"BBBBB",Toast.LENGTH_SHORT).show();
-        }
-
         //Each item will have an OnClickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +135,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
             cart = user.getCart();
             user.addProductToCart(orderLine);
         }catch ( NullPointerException e){
-            cart= new Order(user.getUid(), new Date());
+            cart= new Order("A", new Date());
             cart.addOrderLine(orderLine);
             user.setCart(cart);
         }
