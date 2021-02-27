@@ -30,6 +30,10 @@ public class Order implements Serializable {
         this.status=0;
     }
 
+    public void  addOrderLine(OrderLine orderLine){
+        orderLines.add(orderLine);
+    }
+
     public String getOrderId() {
         return orderId;
     }

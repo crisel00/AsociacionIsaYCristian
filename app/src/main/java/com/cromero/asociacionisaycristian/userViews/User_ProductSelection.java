@@ -8,11 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.cromero.asociacionisaycristian.models.User;
 import com.cromero.asociacionisaycristian.userControllers.User_AdapterProduct;
+import com.firebase.ui.auth.viewmodel.AuthViewModelBase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,21 +26,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class User_ProductSelection extends AppCompatActivity {
-    private ValueEventListener eventListener;
+    private ValueEventListener eventListener, userEventListener;
     private RecyclerView recView;
     //Object variables
+    private User user;
     private Store selectedStore;
     String idStore;
     private Intent intent;
     private ArrayList<Product> products;
-    //Database variables
+    //Database and Firebase variables
     private FirebaseDatabase database;
-    private DatabaseReference dbReference;
+    private DatabaseReference dbReference,dbUser;
+    private FirebaseAuth mAuth;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__product_selection);
+
+        //todo posible cambio (mover a clase externa)
+        //Initialization of Firebase Authentication
+        mAuth = FirebaseAuth.getInstance();
+        uid= mAuth.getCurrentUser().getUid();
 
         //The storeId is recovered
         intent = getIntent();
@@ -66,10 +78,14 @@ public class User_ProductSelection extends AppCompatActivity {
         //Database initialization
         database = FirebaseDatabase.getInstance();
         dbReference = database.getReference().child("stores").child(idStore);
+        dbUser= database.getReference().child("User").child(uid);
 
-        //EventListener asignation
+        //EventListeners asignation
+        setUserEventListener();
+        dbUser.addValueEventListener(userEventListener);
         setEventListener();
         dbReference.addValueEventListener(eventListener);
+
     }
 
     //Database listener
@@ -84,9 +100,28 @@ public class User_ProductSelection extends AppCompatActivity {
                     products= (ArrayList<Product>) selectedStore.getProducts();
 
                     //Assignment of the Recycler View adapter with the product list
-                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore);
+                    Toast.makeText(getApplicationContext(),"bbbb",Toast.LENGTH_SHORT).show();
+                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore,user);
                     recView.setAdapter(adapter);
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("onDataChange", "Error!", databaseError.toException());
+            }
+        };
+    }
+    //Database listener
+    public void setUserEventListener(){
+        userEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //The current user is extracted
+                    user= dataSnapshot.getValue(User.class);
+                }else{
+                    Toast.makeText(getApplicationContext(),"aaaaa",Toast.LENGTH_SHORT).show();
                 }
             }
 

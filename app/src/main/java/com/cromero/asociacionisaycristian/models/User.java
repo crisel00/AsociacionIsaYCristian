@@ -6,6 +6,7 @@ import java.util.List;
 
 public class User implements Serializable {
     private String userName, email, uid;
+    private Order cart;
     private List<Order> orders= new ArrayList<>();
     private float balance;
     private boolean isManager;
@@ -19,6 +20,7 @@ public class User implements Serializable {
         this.uid=uid;
         this.balance = 0;
         isManager=false;
+        cart=new Order();
     }
 
     public String getUserName() {
@@ -50,6 +52,18 @@ public class User implements Serializable {
     }
 
     public float getBalance() { return balance; }
+
+    public Order getCart() {
+        return cart;
+    }
+
+    public void setCart(Order cart) {
+        this.cart = cart;
+    }
+
+    public void addProductToCart(OrderLine orderLine) {
+        cart.addOrderLine(orderLine);
+    }
 
     public boolean isManager(){return isManager;}
     public void  makeManager(){isManager=true;}

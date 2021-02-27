@@ -16,22 +16,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.models.Order;
+import com.cromero.asociacionisaycristian.models.OrderLine;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduct.User_AdapterProductViewHolder> {
     private ArrayList<Product> products;
+    private  User user;
     private  Store store;
     private Context context;
     private Product productItem;
 
     //AdapterStore's constructor
-    public User_AdapterProduct(ArrayList<Product> products, Store store) {
+    public User_AdapterProduct(ArrayList<Product> products, Store store, User user) {
         this.products = products;
         this.store=store;
+        this.user=user;
     }
 
     @NonNull
@@ -122,6 +127,19 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         alertDialog.show();
     }
 
+    private void addProductToCart(float cantidad){
+        OrderLine orderLine= new OrderLine(productItem,cantidad,store );
+        Order cart;
+        try {
+            cart = user.getCart();
+            user.addProductToCart(orderLine);
+        }catch ( NullPointerException e){
+            cart= new Order(user.getUid(), new Date());
+            cart.addOrderLine(orderLine);
+            user.setCart(cart);
+        }
+    }
+
     private void selectAmount(View view) {
         //Initialization
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -141,6 +159,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         alertDialog.setPositiveButton(view.getResources().getText(R.string.accept),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        addProductToCart(Float.parseFloat(input.getText().toString()));
                         Toast.makeText(context,"Añadido(s) " + input.getText().toString() +" " + productItem.getProductName(),Toast.LENGTH_SHORT).show();
                        /* float balance = Float.parseFloat(input.getText().toString());
                         float oldBalance= user.getBalance();
