@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerViews.TabbedActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class UserOrManagerActivity extends AppCompatActivity {
 
