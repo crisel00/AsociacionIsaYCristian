@@ -21,6 +21,7 @@ import com.cromero.asociacionisaycristian.models.OrderLine;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
     private Product productItem;
 
     //AdapterStore's constructor
-    public User_AdapterProduct(ArrayList<Product> products, Store store) {
+    public User_AdapterProduct(ArrayList<Product> products, Store store, User user) {
         this.products = products;
         this.store=store;
         this.user=user;
@@ -130,7 +131,6 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
     private void addProductToCart(float cantidad){
         OrderLine orderLine= new OrderLine(productItem,cantidad,store );
         Order cart;
-        user= ObtainUser.getUser();
         try {
             cart = user.getCart();
             user.addProductToCart(orderLine);
@@ -138,6 +138,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
             cart= new Order("A", new Date());
             cart.addOrderLine(orderLine);
             user.setCart(cart);
+            FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).setValue(user);
         }
     }
 

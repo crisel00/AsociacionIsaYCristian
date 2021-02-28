@@ -1,34 +1,33 @@
 package com.cromero.asociacionisaycristian.userControllers;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cromero.asociacionisaycristian.R;
-import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.cromero.asociacionisaycristian.models.User;
 import com.cromero.asociacionisaycristian.userViews.User_ProductSelection;
 
 import java.util.ArrayList;
 
 public class User_AdapterStore extends RecyclerView.Adapter<User_AdapterStore.User_AdapterStoreViewHolder> {
     private ArrayList<Store> stores;
+    private User user;
     private Context context;
 
     //AdapterStore's constructor
-    public User_AdapterStore(ArrayList<Store> stores){
+    public User_AdapterStore(ArrayList<Store> stores, User user){
 
         this.stores = stores;
 
+        this.user = user;
     }
 
     @NonNull
@@ -59,6 +58,7 @@ public class User_AdapterStore extends RecyclerView.Adapter<User_AdapterStore.Us
                 //When an item is pressed the list of its products will be loaded
                 Intent intent= new Intent(context, User_ProductSelection.class);
                 intent.putExtra("idStore",idStore);
+                intent.putExtra("user",user);
                 context.startActivity(intent);
             }
         });

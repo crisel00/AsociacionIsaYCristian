@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.cromero.asociacionisaycristian.models.User;
 import com.cromero.asociacionisaycristian.userControllers.User_AdapterStore;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,7 @@ public class User_StoreSelection extends AppCompatActivity {
     ArrayList<Store> stores;
     DatabaseReference dbRefenrece = FirebaseDatabase.getInstance().getReference();
     RecyclerView recView;
+    private User user;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -55,6 +57,9 @@ public class User_StoreSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_user__store_selection);
 
+
+        user = (User) getIntent().getSerializableExtra("user");
+
         //RecyclerView initialization
         recView = (RecyclerView) findViewById(R.id.rv_userStore);
 
@@ -67,7 +72,7 @@ public class User_StoreSelection extends AppCompatActivity {
         listenStoreDatabase();
 
         //Assignment of the Recycler View adapter with the user list
-        User_AdapterStore adapter = new User_AdapterStore(stores);
+        User_AdapterStore adapter = new User_AdapterStore(stores,user);
         recView.setAdapter(adapter);
     }
 
@@ -81,7 +86,7 @@ public class User_StoreSelection extends AppCompatActivity {
                     for(DataSnapshot snap: datos){
                         stores.add(snap.getValue(Store.class));
                     }
-                    User_AdapterStore adapter = new User_AdapterStore(stores);
+                    User_AdapterStore adapter = new User_AdapterStore(stores, user);
                     recView.setAdapter(adapter);
                 }
             }

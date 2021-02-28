@@ -1,5 +1,6 @@
 package com.cromero.asociacionisaycristian.userViews;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,16 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Product;
 import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
-import com.cromero.asociacionisaycristian.userControllers.ObtainUser;
 import com.cromero.asociacionisaycristian.userControllers.User_AdapterProduct;
-import com.firebase.ui.auth.viewmodel.AuthViewModelBase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,6 +44,7 @@ public class User_ProductSelection extends AppCompatActivity {
         //The storeId is recovered
         intent = getIntent();
         idStore= intent.getStringExtra("idStore");
+        user = (User) intent.getSerializableExtra("user");
 
         /*
         //FloatingActionButton Listener
@@ -71,15 +69,15 @@ public class User_ProductSelection extends AppCompatActivity {
 
         //Database initialization
         database = FirebaseDatabase.getInstance();
-        dbReference = database.getReference().child("stores").child(idStore);
+        dbReference = database.getReference();
         //EventListeners asignation
         setEventListener();
-        dbReference.addValueEventListener(eventListener);
-
+        dbReference.child("stores").child(idStore).addValueEventListener(eventListener);
     }
 
     //Database listener
     public void setEventListener(){
+
         eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -90,7 +88,7 @@ public class User_ProductSelection extends AppCompatActivity {
                     products= (ArrayList<Product>) selectedStore.getProducts();
 
                     //Assignment of the Recycler View adapter with the product list
-                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore);
+                    User_AdapterProduct adapter = new User_AdapterProduct(products,selectedStore,user);
                     recView.setAdapter(adapter);
                 }
             }
@@ -101,4 +99,6 @@ public class User_ProductSelection extends AppCompatActivity {
             }
         };
     }
+
+
 }
