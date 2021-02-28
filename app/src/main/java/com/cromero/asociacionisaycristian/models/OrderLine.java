@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class OrderLine implements Serializable {
     Product product;
     Float amount;
-    Store store;
+    String idstore;
 
     public OrderLine() {
     }
 
-    public OrderLine(Product product, Float amount, Store store) {
+    public OrderLine(Product product, Float amount, String idstore) {
         this.product = product;
         this.amount = amount;
-        this.store = store;
+        this.idstore = idstore;
     }
 
     public Product getProduct() {
@@ -32,11 +32,11 @@ public class OrderLine implements Serializable {
         this.amount = amount;
     }
 
-    public Store getStore() {
-        return store;
+    public String getStore() {
+        return idstore;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStore(String store) {
+        this.idstore = store;
     }
 }

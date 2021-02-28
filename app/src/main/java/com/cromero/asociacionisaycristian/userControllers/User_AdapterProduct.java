@@ -30,13 +30,14 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
     private ArrayList<Product> products;
     private  User user;
     private  Store store;
+    private  String idStore;
     private Context context;
-    private Product productItem;
 
     //AdapterStore's constructor
     public User_AdapterProduct(ArrayList<Product> products, Store store, User user) {
         this.products = products;
-        this.store=store;
+        this.store =store;
+        this.idStore=store.getIdStore();
         this.user=user;
     }
 
@@ -54,7 +55,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
 
     @Override
     public void onBindViewHolder(@NonNull User_AdapterProductViewHolder holder, int position) {
-        productItem = products.get(position);
+        Product productItem = products.get(position);
 
         String idProduct= productItem.getIdProduct();
         String nameProduct= productItem.getProductName();
@@ -118,7 +119,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                       selectAmount(view);
+                       selectAmount(view,productItem);
                         break;
                 }
             }
@@ -128,8 +129,8 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         alertDialog.show();
     }
 
-    private void addProductToCart(float cantidad){
-        OrderLine orderLine= new OrderLine(productItem,cantidad,store );
+    private void addProductToCart(float cantidad, Product productItem){
+        OrderLine orderLine= new OrderLine(productItem,cantidad, idStore);
         Order cart;
         try {
             cart = user.getCart();
@@ -137,12 +138,12 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         }catch ( NullPointerException e){
             cart= new Order("A", new Date());
             cart.addOrderLine(orderLine);
-            user.setCart(cart);
-            FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).setValue(user);
         }
+        user.setCart(cart);
+        FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).setValue(user);
     }
 
-    private void selectAmount(View view) {
+    private void selectAmount(View view, Product productItem) {
         //Initialization
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle(productItem.getProductName());
@@ -161,7 +162,7 @@ public class User_AdapterProduct extends RecyclerView.Adapter<User_AdapterProduc
         alertDialog.setPositiveButton(view.getResources().getText(R.string.accept),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        addProductToCart(Float.parseFloat(input.getText().toString()));
+                        addProductToCart(Float.parseFloat(input.getText().toString()),productItem);
                         Toast.makeText(context,"Añadido(s) " + input.getText().toString() +" " + productItem.getProductName(),Toast.LENGTH_SHORT).show();
                        /* float balance = Float.parseFloat(input.getText().toString());
                         float oldBalance= user.getBalance();

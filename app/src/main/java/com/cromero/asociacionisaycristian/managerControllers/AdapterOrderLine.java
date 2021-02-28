@@ -66,10 +66,10 @@ public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.Adap
 
         Product product = lineItem.getProduct();
         Float amount = lineItem.getAmount();
-        Store store = lineItem.getStore();
+        String store = lineItem.getStore();
 
         //The order data are put into the layout
-        holder.tv_orderLineStore.setText(store.getNameStore());
+        holder.tv_orderLineStore.setText(store);
         holder.tv_orderLineProductName.setText(product.getProductName());
         holder.tv_orderLineAmount.setText(Float.toString(amount));
         holder.tv_orderLinePrice.setText(Float.toString(product.getPrice()) + " €");
