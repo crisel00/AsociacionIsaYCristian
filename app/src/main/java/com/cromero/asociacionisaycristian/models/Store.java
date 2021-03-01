@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store implements Serializable {
-    String idStore, nameStore;
-    List<Product> products= new ArrayList<Product>();
+    private  static  int nextId=0;
+    private String idStore, nameStore;
+    private List<Product> products= new ArrayList<Product>();
 
     public Store() {
     }
 
     public Store(String idStore, String nameStore) {
-        this.idStore = idStore;
+        nextId++;
+        this.idStore = idStore+String.valueOf(nextId);
         this.nameStore = nameStore;
     }
 
