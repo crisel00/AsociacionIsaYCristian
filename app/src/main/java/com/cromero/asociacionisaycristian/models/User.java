@@ -66,7 +66,7 @@ public class User implements Serializable {
     }
 
     public void addProductToCart(OrderLine orderLine) {
-        cart.addOrderLine(orderLine);
+        cart.addLine(orderLine);
     }
 
     public boolean isManager(){return isManager;}

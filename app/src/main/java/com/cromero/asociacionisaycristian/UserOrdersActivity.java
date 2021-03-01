@@ -66,7 +66,7 @@ public class UserOrdersActivity extends AppCompatActivity {
                     if(orders.size()<1){
                         Order  welcOrder = new Order("Bienvenido " + userID,new java.util.Date());
 
-                        OrderLine welcLine = new OrderLine(new Product("wlc_01", "welcome_product", "YES", 0, 1), 1, new Store("WLC","Welcome"));
+                        OrderLine welcLine = new OrderLine(new Product("wlc_01", "welcome_product", "YES", 0, 1), (float) 1.0,"welcome" );
                         welcOrder.addLine(welcLine);
 
                         System.out.println(selectedUser.getEmail());

@@ -26,17 +26,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrderViewHolder> {
-    private ArrayList<Order> orders;
+    private List<Order> orders;
     private Context context;
     //Database variables
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
 
     //AdapterOrder's constructor
-    public AdapterOrder(ArrayList<Order> orders) {
+    public AdapterOrder(List<Order> orders) {
         this.orders = orders;
 
         //Database initialization

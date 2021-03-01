@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,14 @@ import android.view.ViewGroup;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerControllers.AdapterOrder;
 import com.cromero.asociacionisaycristian.models.Order;
+import com.cromero.asociacionisaycristian.models.OrderLine;
+import com.cromero.asociacionisaycristian.models.Product;
+import com.cromero.asociacionisaycristian.models.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,12 +31,15 @@ import java.util.Date;
 
 public class OrderManagement extends Fragment {
     private RecyclerView recView;
+    private ValueEventListener eventListener;
     //Database variables
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
     //
     private ArrayList<Order> orders;
+    User user;
     public OrderManagement() {
+
         // Required empty public constructor
     }
 
@@ -64,26 +74,31 @@ public class OrderManagement extends Fragment {
 
         orders= new ArrayList<Order>();
 
-        //String orderId, List<OrderLine> orderLines, Date orderDate
-        String dateStr = "04/05/2010";
+        //Database initialization and assignment of listener.
+        dbReference = FirebaseDatabase.getInstance().getReference().child("User");
+        setEventListener();
+        dbReference.addValueEventListener(eventListener);
+    }
+    //Database listener
+    public void setEventListener(){
+        eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot xUser : dataSnapshot.getChildren() ){
+                        user  = xUser.getValue(User.class);
+                        orders.addAll(user.getOrders());
+                    }
+                    //Assignment of the Recycler View adapter with the product list
+                    AdapterOrder adapter = new AdapterOrder(orders);
+                    recView.setAdapter(adapter);
+                }
+            }
 
-        Date c = Calendar.getInstance().getTime();
-
-        Order order=new Order("01",c);
-        orders.add(order);
-        order=new Order("02",c);
-        orders.add(order);
-        order=new Order("03",c);
-        orders.add(order);
-        order=new Order("04",c);
-        orders.add(order);
-        order=new Order("05",c);
-        orders.add(order);
-        order=new Order("06",c);
-        orders.add(order);
-
-        //Assignment of the Recycler View adapter with the user list
-        AdapterOrder adapter = new AdapterOrder(orders);
-        recView.setAdapter(adapter);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("onDataChange", "Error!", databaseError.toException());
+            }
+        };
     }
 }
