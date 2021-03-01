@@ -13,9 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsociacionIsaYCristian">
-        <activity android:name=".userViews.User_ProductSelection"></activity>
-        <activity android:name=".userViews.User_OrderManagement" />
-        <activity android:name=".userViews.User_StoreSelection" />
         <activity android:name=".userViews.UserOrManagerActivity" />
         <activity android:name=".managerViews.AddProductActivity" />
         <activity
