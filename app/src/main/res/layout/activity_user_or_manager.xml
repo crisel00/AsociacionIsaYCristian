@@ -20,16 +20,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btn_user"
-            android:onClick="userPart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:text="Entrar como usuario" />
-
-        <Button
             android:id="@+id/btn_manager"
             android:onClick="managerPart"
             android:layout_width="match_parent"
