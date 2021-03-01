@@ -43,8 +43,6 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
     private ValueEventListener eventListener;
-    //Firebase variables
-    private String userID;
 
     //AdapterOrder's constructor
     public AdapterOrder(List<Order> orders) {
@@ -72,7 +70,13 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         int orderStatus = orderItem.getStatus();
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-        String formattedDate = df.format(orderDate);
+        String formattedDate;
+        try {
+            formattedDate = df.format(orderDate);
+        }catch (Exception e){
+            formattedDate="";
+        }
+
 
         String statusInString="";
         switch (orderStatus){

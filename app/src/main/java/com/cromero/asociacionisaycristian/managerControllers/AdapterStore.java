@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
+import com.cromero.asociacionisaycristian.models.Order;
 import com.cromero.asociacionisaycristian.models.Store;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStoreViewHolder> {
     private ArrayList<Store> stores;
@@ -56,7 +60,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
             @Override
             public void onClick(View v) {
                 //When an item is pressed an option menu will be showed
-                showDialog(v,idStore,nameStore);
+                showDialog(v,storeItem);
             }
         });
 
@@ -86,7 +90,9 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
     }
 
     //OptionDialog creation method
-    private void showDialog(View view,String idStore, String nameStore){
+    private void showDialog(View view, Store store){
+        String idStore=store.getIdStore();
+        String nameStore=store.getNameStore();
         //Initialization
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
         optionDialog.setTitle(nameStore);
@@ -103,7 +109,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
                         context.startActivity(intent);
                         break;
                     case 1:
-                        deleteConfirmation(view, idStore,nameStore);
+                        deleteConfirmation(view, store);
                         break;
                 }
             }
@@ -113,7 +119,9 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
         alertDialog.show();
     }
 
-    private void deleteConfirmation(View view,String idStore, String nameStore){
+    private void deleteConfirmation(View view,Store store){
+        String idStore=store.getIdStore();
+        String nameStore=store.getNameStore();
         //Initialization
         AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
         alertDialogBu.setTitle(view.getResources().getText(R.string.delete));
@@ -122,6 +130,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
         //Positive option
         alertDialogBu.setPositiveButton( view.getResources().getText(R.string.accept), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                deleteStore(store);
                 Toast.makeText(context, nameStore + view.getResources().getText(R.string.is_deleted), Toast.LENGTH_SHORT).show();
             }
         });
@@ -134,6 +143,11 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.AdapterStore
         //Dialog creation
         AlertDialog alertDialog = alertDialogBu.create();
         alertDialog.show();
+    }
+
+    private void deleteStore(Store store){
+        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("stores").child(store.getIdStore());
+        dbReference.removeValue();
     }
 
 
