@@ -35,19 +35,20 @@ public class OrderLineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_line);
 
+        //Recycler view initialization
         recView = (RecyclerView) findViewById(R.id.rv_orderLines);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recView.setLayoutManager(layoutManager);
 
+        //Order is recovered
         order = (Order) getIntent().getSerializableExtra("order");
 
-        AdapterOrderLine adapter = new AdapterOrderLine(order);
-        recView.setAdapter(adapter);
 
-//        dbReference = FirebaseDatabase.getInstance().getReference().child("User").child(order.getUserID());
-//        setEventListener();
-//        dbReference.addValueEventListener(eventListener);
+        //Database initialization
+       dbReference = FirebaseDatabase.getInstance().getReference().child("User").child(order.getUserID());
+       setEventListener();
+       dbReference.addValueEventListener(eventListener);
     }
 
     public void setEventListener(){
@@ -61,6 +62,8 @@ public class OrderLineActivity extends AppCompatActivity {
                     lines = order.getOrderLines();
 
                     //Assignment of the Recycler View adapter with the product list
+                    AdapterOrderLine adapter = new AdapterOrderLine(order,lines);
+                    recView.setAdapter(adapter);
 
                 }
             }

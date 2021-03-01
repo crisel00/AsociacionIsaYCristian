@@ -48,8 +48,8 @@ public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.Adap
     private ValueEventListener eventListener;
 
     //AdapterOrder's constructor
-    public AdapterOrderLine(Order order) {
-        this.lines = order.getOrderLines();
+    public AdapterOrderLine(Order order,  ArrayList<OrderLine> lines) {
+        this.lines = lines;
         this.order = order;
         //Database initialization
         database = FirebaseDatabase.getInstance();
@@ -180,23 +180,33 @@ public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.Adap
     private void delete(OrderLine orderLine){
         OrderLine myLine;
         List<OrderLine> orderLinesDeleted= new ArrayList<>();
+        //Iterate in orderLines, the line deleted is erased
         for(int i= order.getOrderLines().size();i>0;i--){
             myLine=order.getOrderLines().get(i-1);
-            if(myLine.getOrderLineId()==orderLine.getOrderLineId()){
+            if(myLine.getOrderLineId()!=orderLine.getOrderLineId()){
                 orderLinesDeleted.add(myLine);
             }
         }
         order.setOrderLines((ArrayList<OrderLine>) orderLinesDeleted);
-        /*Order myOrder;
+
+
+        Order myOrder;
         List<Order> ordersDeleted= new ArrayList<>();
+        //Same with the order of those lines, it will be replaced with an order without that line
         for(int i= user.getOrders().size(); i>0;  i--){
             myOrder=user.getOrders().get(i-1);
             if(myOrder.getOrderId()!=order.getOrderId()){
                 ordersDeleted.add(myOrder);
+            }else{
+                //if the order is the order of the line the old lines are replaced only if there are lines left
+                if(orderLinesDeleted.size()>0) {
+                    myOrder.setOrderLines((ArrayList<OrderLine>) orderLinesDeleted);
+                    ordersDeleted.add(myOrder);
+                } //If there aren't lines left the order is deleted
             }
         }
         user.setOrders(ordersDeleted);
-        dbReference.setValue(user);*/
+        dbReference.setValue(user);
     }
 
     //Database listener
