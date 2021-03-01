@@ -85,6 +85,7 @@ public class OrderManagement extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    orders.clear();
                     for (DataSnapshot xUser : dataSnapshot.getChildren() ){
                         user  = xUser.getValue(User.class);
                         orders.addAll(user.getOrders());
