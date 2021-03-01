@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Order implements Serializable {
     String orderId;
-    ArrayList<OrderLine> orderLines;
+    ArrayList<OrderLine> orderLines = new ArrayList<>();
     Date orderDate;
     int status;
     String UserID = "";
@@ -28,10 +28,6 @@ public class Order implements Serializable {
         this.orderLines = new ArrayList<>();
         this.orderDate = orderDate;
         this.status=0;
-    }
-
-    public void  addOrderLine(OrderLine orderLine){
-        orderLines.add(orderLine);
     }
 
     public String getOrderId() {
@@ -72,5 +68,9 @@ public class Order implements Serializable {
 
     public void setUserID(String userID) {
         UserID = userID;
+    }
+
+    public void addLine(OrderLine line) {
+        orderLines.add(line);
     }
 }

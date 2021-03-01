@@ -23,6 +23,10 @@ public class User implements Serializable {
         cart=new Order();
     }
 
+    public void addOrder(Order order){
+            orders.add(order);
+    }
+
     public String getUserName() {
         return userName;
     }

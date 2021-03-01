@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.managerViews.TabbedActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.cromero.asociacionisaycristian.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
