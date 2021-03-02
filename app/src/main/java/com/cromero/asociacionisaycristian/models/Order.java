@@ -74,4 +74,14 @@ public  class Order implements Serializable {
     public void addLine(OrderLine line) {
         orderLines.add(line);
     }
+
+    public float getTotal(){
+        Float total = 0f;
+
+        for(OrderLine line : orderLines){
+            total += line.getProduct().getPrice() * line.getAmount();
+        }
+
+        return total;
+    }
 }

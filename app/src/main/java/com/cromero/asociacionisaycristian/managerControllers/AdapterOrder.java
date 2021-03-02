@@ -4,13 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cromero.asociacionisaycristian.OrderLineActivity;
-import com.cromero.asociacionisaycristian.managerViews.ProductsActivity;
 import com.cromero.asociacionisaycristian.R;
 import com.cromero.asociacionisaycristian.models.Order;
+import com.cromero.asociacionisaycristian.models.OrderLine;
+import com.cromero.asociacionisaycristian.models.Product;
+import com.cromero.asociacionisaycristian.models.Store;
 import com.cromero.asociacionisaycristian.models.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -140,8 +138,16 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         AlertDialog.Builder optionDialog = new AlertDialog.Builder(context);
         optionDialog.setTitle(String.valueOf(order.getOrderId()));
 
-        //Options creation
-        CharSequence opciones[] = {context.getString(R.string.manage),context.getString(R.string.delete)};
+        CharSequence opciones[] = new CharSequence[0];
+
+        switch (order.getStatus()){
+            case 0:
+                opciones = new CharSequence[]{context.getString(R.string.manage),context.getString(R.string.delete), context.getString(R.string.order_confirm)};
+                break;
+            case 1:
+                opciones = new CharSequence[]{context.getString(R.string.manage)};
+                break;
+        }
         //OnClickMethod for each option
         optionDialog.setItems(opciones, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -154,12 +160,118 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
                     case 1:
                         deleteConfirmation(view,order);
                         break;
+                    case 2:
+                        orderConfirmation(view,order);
+                        break;
                 }
             }
         });
         //Dialog creation
         AlertDialog alertDialog = optionDialog.create();
         alertDialog.show();
+    }
+
+    private void orderConfirmation(View view, Order order) {
+        //Initialization
+        AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
+        alertDialogBu.setTitle(view.getResources().getText(R.string.order_confirm));
+        alertDialogBu.setMessage(view.getResources().getText(R.string.are_you_sure) + String.valueOf(order.getOrderId()) + view.getResources().getText(R.string.cant_undo));
+
+        //Positive option
+        alertDialogBu.setPositiveButton( view.getResources().getText(R.string.accept), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //aceptar pedido: 0.- Comprobar existencias--Hecho  1.-Cambiar estado pedido. 2.- Eliminar saldo del cliente. 3.-Eliminar stock
+
+                dbReference = database.getReference().child("User").child(order.getUserID());
+
+                Float totalPedido = order.getTotal();
+                if(user == null){
+                    setEventListener();
+                    dbReference.addListenerForSingleValueEvent(eventListener);
+                }
+
+                //Comprueba saldo
+                if(user.getBalance() < totalPedido){
+                        Toast.makeText(context, R.string.not_enough_balance, Toast.LENGTH_SHORT).show();
+                        return;
+                }
+
+                checkStockFromStore(order);
+
+
+                Toast.makeText(context, "va bien", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Negative option
+        alertDialogBu.setNegativeButton(view.getResources().getText(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, view.getResources().getText(R.string.cancelled), Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Dialog creation
+        AlertDialog alertDialog = alertDialogBu.create();
+        alertDialog.show();
+    }
+
+
+    public void checkStockFromStore(Order order){
+        Boolean stock = true;
+        stock = true;
+        dbReference = database.getReference();
+        dbReference.child("stores").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean stock = true;
+                Store store;
+                Product prod;
+                for(OrderLine line : order.getOrderLines()){
+                    for(DataSnapshot snap : snapshot.getChildren()){
+                        store = snap.getValue(Store.class);
+
+                        assert store != null;
+                        if(store.getIdStore().equals(line.getStore())){
+                            prod = store.findProduct(line.getProduct().getIdProduct());
+                            if(prod != null && prod.getStock() < line.getAmount()){
+                                stock = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if(stock){
+                    user.setBalance(user.getBalance() - order.getTotal());
+
+
+
+                    for(OrderLine line : order.getOrderLines()){
+                        for(DataSnapshot snap : snapshot.getChildren()){
+                            store = snap.getValue(Store.class);
+
+                            assert store != null;
+                            if(store.getIdStore().equals(line.getStore())){
+                                prod = store.findProduct(line.getProduct().getIdProduct());
+                                prod.setStock(prod.getStock() - line.getAmount());
+                                store.editProducts(prod);
+                                dbReference.child("stores").child(store.getIdStore()).setValue(store);
+                            }
+                        }
+                    }
+
+                    order.setStatus(1);
+                    user.editOrder(order);
+                    dbReference.child("User").child(order.getUserID()).setValue(user);
+
+                } else{
+                    Toast.makeText(context, R.string.not_enough_stock, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void deleteConfirmation(View view, Order order){
@@ -217,4 +329,6 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
             }
         };
     }
+
+
 }

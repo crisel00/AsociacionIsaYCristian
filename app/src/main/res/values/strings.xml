@@ -52,6 +52,9 @@
     <string name="viewOrders">Ver pedidos</string>
     <string name="outstanding">Pendiente</string>
     <string name="collected">Recogido</string>
+    <string name="order_confirm">confirmar pedido</string>
+    <string name="not_enough_balance">El usuario no tiene saldo suficiente</string>
+    <string name="not_enough_stock">No hay suficiente stock</string>
 
 
 </resources>
