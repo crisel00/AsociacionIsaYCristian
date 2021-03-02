@@ -28,12 +28,14 @@ public class UserOrManagerActivity extends AppCompatActivity {
 
         getUser();
 
+        startActivity(new Intent(this, TabbedActivity.class));
+
     }
 
 
     public void managerPart(View view) {
 
-        startActivity(new Intent(this, TabbedActivity.class));
+
     }
 
 
