@@ -95,7 +95,9 @@ public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.Adap
                 dbReference.addValueEventListener(eventListener);
 
                 //When an item is pressed an option menu will be showed
-                showDialog(v,lineItem);
+                if(order.getStatus() == 0){
+                    showDialog(v,lineItem);
+                }
             }
         });
 
