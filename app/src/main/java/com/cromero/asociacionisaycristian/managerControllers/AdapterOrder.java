@@ -191,7 +191,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
                         Toast.makeText(context, R.string.not_enough_balance, Toast.LENGTH_SHORT).show();
                         return;
                 }
-                
+
                 checkStockFromStore(order);
 
 
