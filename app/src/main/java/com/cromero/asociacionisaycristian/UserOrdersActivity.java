@@ -31,7 +31,7 @@ public class UserOrdersActivity extends AppCompatActivity {
     private String userID;
     private ValueEventListener eventListener;
     private User selectedUser;
-    private ArrayList<Order> orders;
+    private ArrayList<Order> orders= new ArrayList<Order>();
     private DatabaseReference dbReference;
 
     @Override
@@ -57,8 +57,8 @@ public class UserOrdersActivity extends AppCompatActivity {
         eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                orders.clear();
                 if(dataSnapshot.exists()){
+                    orders.clear();
                     //The current user is extracted
                     selectedUser = dataSnapshot.getValue(User.class);
                     //Orders list is refilled

@@ -46,16 +46,16 @@
     <string name="cancelled"> Cancelled</string>
     <string name="empty_fields">Please fill all the fields</string>
     <string name="product_added">Product added</string>
-    <string name="product_edited">Editted</string>
+    <string name="product_edited">Edited</string>
 
     <!--Adapter User and Order texts-->
     <string name="setBalance">Grant balance</string>
     <string name="viewOrders">View orders</string>
     <string name="outstanding">Outstanding</string>
     <string name="collected">Collected</string>
-    <string name="order_confirm">confirmar pedido</string>
-    <string name="not_enough_balance">El usuario no tiene saldo suficiente</string>
-    <string name="not_enough_stock">No hay suficiente stock</string>
+    <string name="order_confirm">Confirm order</string>
+    <string name="not_enough_balance">Balance is not enough</string>
+    <string name="not_enough_stock">Not enough stock</string>
     <string name="amount">Amount</string>
 
 </resources>

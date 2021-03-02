@@ -73,19 +73,6 @@ public class StoreManagement extends Fragment {
 
         listenStoreDatabase();
 
- /**       Store store= new Store("1","Panadería 1");
-        stores.add(store);
-         store= new Store("2","Panadería 2");
-        stores.add(store);
-         store= new Store("3","Panadería 3");
-        stores.add(store);
-         store= new Store("4","Panadería 4");
-        stores.add(store);
-         store= new Store("5","Panadería 5");
-        stores.add(store);
-         store= new Store("6","Panadería 6");
-        stores.add(store);*/
-
         //Assignment of the Recycler View adapter with the user list
         AdapterStore adapter = new AdapterStore(stores);
         recView.setAdapter(adapter);

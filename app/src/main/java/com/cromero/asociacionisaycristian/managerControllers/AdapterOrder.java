@@ -199,9 +199,6 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
                 }
 
                 checkStockFromStore(order);
-
-
-                Toast.makeText(context, "va bien", Toast.LENGTH_SHORT).show();
             }
         });
         //Negative option
