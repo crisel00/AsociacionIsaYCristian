@@ -47,7 +47,7 @@
     <string name="cancelled"> Cancelado</string>
     <string name="empty_fields">Por favor rellene todos los campos</string>
     <string name="product_added">Producto añadido</string>
-    <string name="product_edited">Producto editado</string>
+    <string name="product_edited">Editado</string>
 
     <!--Adapter User and Order texts-->
     <string name="setBalance">Conceder saldo</string>
@@ -57,5 +57,6 @@
     <string name="order_confirm">confirmar pedido</string>
     <string name="not_enough_balance">El usuario no tiene saldo suficiente</string>
     <string name="not_enough_stock">No hay suficiente stock</string>
+    <string name="amount">Cantidad</string>
 
 </resources>
