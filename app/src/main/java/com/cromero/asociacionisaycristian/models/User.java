@@ -69,6 +69,24 @@ public class User implements Serializable {
         cart.addLine(orderLine);
     }
 
+    public  void editOrder(Order order){
+        List<Order> editedOrders= new ArrayList<>();
+        //The order list of the store is iterated
+        for (int i = 0; i<orders.size(); i++){
+            Order thisOrder = orders.get(i);
+
+            //If a order is the order being edited (same id) it is replaced by the new order
+            if (thisOrder.getOrderId() == order.getOrderId()){
+                thisOrder=order;
+            }
+            //The products are added to the new list
+            editedOrders.add(thisOrder);
+        }
+        //Finally the list is added to the store
+        orders.clear();
+        orders=editedOrders;
+    }
+
     public boolean isManager(){return isManager;}
     public void  makeManager(){isManager=true;}
 

@@ -55,4 +55,15 @@ public class Store implements Serializable {
     }
 
     public void addProduct(Product pr){products.add(pr);}
+
+    public Product findProduct(String idProduct){
+        Product product = null;
+        for(Product pr : products){
+            if(pr.getIdProduct().equals(idProduct)){
+                return pr;
+            }
+        }
+
+        return product;
+    }
 }
