@@ -247,24 +247,11 @@ public class AdapterOrderLine extends RecyclerView.Adapter<AdapterOrderLine.Adap
                                 }
                             }
 
-                            Order myOrder;
-                            List<Order> ordersEdited= new ArrayList<>();
-                            //Same with the order of those lines, it will be replaced with an order with that line edited
-                            for(int i= user.getOrders().size(); i>0;  i--) {
-                                myOrder = user.getOrders().get(i - 1);
-                                if (myOrder.getOrderId() != order.getOrderId()) {
-                                    ordersEdited.add(myOrder);
-                                } else {
-                                    //if the order is the order of the line the old lines are replaced o
-                                    myOrder.setOrderLines((ArrayList<OrderLine>) orderLinesEdited);
-                                    ordersEdited.add(myOrder);
-                                    user.setOrders(ordersEdited);
-                                    dbReference.setValue(user);
-                                }
-                                //It goes back to the order
-                                order.setOrderLines((ArrayList<OrderLine>) orderLinesEdited);
-                                Toast.makeText(context, context.getString(R.string.product_edited), Toast.LENGTH_SHORT).show();
-                            }}catch (Exception e){};
+                            user.editOrder(order);
+
+                            dbReference = FirebaseDatabase.getInstance().getReference();
+                            dbReference.child("User").child(user.getUid()).setValue(user);
+                        }catch (Exception e){};
                     }
                 });
 
