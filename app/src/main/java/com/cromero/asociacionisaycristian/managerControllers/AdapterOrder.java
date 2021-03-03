@@ -80,11 +80,11 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         switch (orderStatus){
             case 0:
                 statusInString= holder.itemView.getContext().getResources().getText(R.string.outstanding).toString();
-                holder.tv_orderStatus.setTextColor(holder.itemView.getContext().getResources().getColor((R.color.purple_500)));
+                holder.tv_orderStatus.setTextColor(holder.itemView.getContext().getResources().getColor((R.color.outstanding)));
                 break;
             case 1:
                 statusInString=holder.itemView.getContext().getResources().getText(R.string.collected).toString();
-                //holder.tv_orderStatus.setTextColor(holder.itemView.getContext().getResources().getColor((R.color.purple_500)));
+                holder.tv_orderStatus.setTextColor(holder.itemView.getContext().getResources().getColor((R.color.paid)));
                 break;
         }
 
@@ -177,7 +177,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.AdapterOrder
         //Initialization
         AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(context);
         alertDialogBu.setTitle(view.getResources().getText(R.string.order_confirm));
-        alertDialogBu.setMessage(view.getResources().getText(R.string.are_you_sure) + String.valueOf(order.getOrderId()) + view.getResources().getText(R.string.cant_undo));
+        alertDialogBu.setMessage(view.getResources().getText(R.string.confirm_sure) + String.valueOf(order.getOrderId()) + view.getResources().getText(R.string.cant_undo));
 
         //Positive option
         alertDialogBu.setPositiveButton( view.getResources().getText(R.string.accept), new DialogInterface.OnClickListener() {

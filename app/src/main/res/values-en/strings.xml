@@ -35,6 +35,7 @@
     <string name="tab_orders">Orders</string>
 
     <!--Adapter Store and Product texts-->
+    <string name="confirm_sure">Are you sure you want to confirm \   </string>
     <string name="manage">Manage</string>
     <string name="delete">Delete</string>
     <string name="are_you_sure">Are you sure you want to delete \ </string>

@@ -35,7 +35,7 @@ public class UserOrManagerActivity extends AppCompatActivity {
 
     public void managerPart(View view) {
 
-
+        startActivity(new Intent(this, TabbedActivity.class));
     }
 
 

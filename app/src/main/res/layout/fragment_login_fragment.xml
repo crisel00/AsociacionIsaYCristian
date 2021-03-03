@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
     tools:context=".managerViews.login_fragment">
 
     <LinearLayout
@@ -60,7 +61,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_weight="1"
-                android:text="@string/register_text" />
+                android:text="@string/register_text"
+                android:backgroundTint="@color/purple"/>
 
             <Button
                 android:id="@+id/bt_login"
@@ -69,7 +71,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_weight="2"
-                android:text="@string/login_Text" />
+                android:text="@string/login_Text"
+                android:backgroundTint="@color/purple"/>
 
         </LinearLayout>
 
